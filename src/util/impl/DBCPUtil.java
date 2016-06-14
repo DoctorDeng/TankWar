@@ -22,7 +22,7 @@ public class DBCPUtil implements SqlUtil{
 	/** 数据源, static */
 	private static DataSource DS;
 	/** 配置文件   */
-	private static final String configFile = "config/dbcp.properties";
+	private static final String configFile = "conf/dbcp.properties";
 
 	/**
 	 * @Title: getConn

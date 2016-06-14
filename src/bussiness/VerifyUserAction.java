@@ -4,7 +4,7 @@ import dao.VerifyUserDao;
 import dao.impl.VerifyUserDaoImpl;
 
 /**
- * 验证用户名和密码是否正确的业务类
+ * 验证用户名和密码是否正确
  * @author Doctor邓
  *
  */
