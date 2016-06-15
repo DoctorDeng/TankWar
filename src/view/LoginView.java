@@ -31,7 +31,7 @@ import view.viewUtil.RoundJTextField;
 
 public class LoginView {
 
-	private JFrame frame;
+	private JFrame frmTankWar;
 	private VerifyUserAction verifyUser;
 	private JTextField user_account;
 	private JPasswordField user_pwd;
@@ -49,7 +49,7 @@ public class LoginView {
 			public void run() {
 				try {
 					LoginView window = new LoginView();
-					window.frame.setVisible(true);
+					window.frmTankWar.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,21 +69,23 @@ public class LoginView {
 	 */
 	private void initialize() {
 		//JFrame.setDefaultLookAndFeelDecorated(true); 
-		frame = new JFrame(); 
-		frame.setBounds( (SCREEN_WIDTH - 431)/2, (SCREEN_HEIGHT - 325)/2, 431, 325);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+		frmTankWar = new JFrame();
+		frmTankWar.setTitle("Tank  War");
+		frmTankWar.setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\win10\\desktop\\tankLogo.png"));
+		frmTankWar.setBounds( (SCREEN_WIDTH - 431)/2, (SCREEN_HEIGHT - 325)/2, 431, 325);
+		frmTankWar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTankWar.setResizable(false);
+		frmTankWar.getContentPane().setLayout(null);
 		
 		JButton login = new JButton("登陆");
 		
 		login.setBounds(212, 342, 93, 23);
-		frame.getContentPane().add(login);
+		frmTankWar.getContentPane().add(login);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(22, 154, 218));
 		panel.setBounds(0, 0, 436, 181);
-		frame.getContentPane().add(panel);
+		frmTankWar.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel closeLabel = new JLabel("");
@@ -99,7 +101,7 @@ public class LoginView {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(235, 242, 249));
 		panel_1.setBounds(0, 182, 436, 150);
-		frame.getContentPane().add(panel_1);
+		frmTankWar.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		user_account = new RoundJTextField();
@@ -181,7 +183,7 @@ public class LoginView {
 					/**
 					 * 登陆成功后，释放登陆窗口
 					 */
-					frame.dispose();
+					frmTankWar.dispose();
 				}
 				else {
 					error_login.setText("用户名或密码错误请重新输入！");
@@ -213,6 +215,10 @@ public class LoginView {
 			public void mouseExited(MouseEvent e) {
 				changePwdLabel.setForeground(new Color(39, 134, 228));
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				openURL.gotoUrl("www.baidu.com");
+			}
 		});
 		/**
 		 * 验证用户名和密码是否正确
@@ -234,19 +240,19 @@ public class LoginView {
 					/**
 					 * 登陆成功后，释放登陆窗口
 					 */
-					frame.dispose();
+					frmTankWar.dispose();
 				}
 				else {
 					error_login.setText("用户名或密码错误请重新输入！");
 				}
 			}
 		});
-		new JframeNoBorder().noBorder(frame);
+		new JframeNoBorder().noBorder(frmTankWar);
 		/**
 		 * 设置窗体为圆角矩形
 		 */
-		AWTUtilities.setWindowShape(frame, new RoundRectangle2D.Double(  
-	            0.0D, 0.0D, frame.getWidth(), frame.getHeight(), 15.0D,  
+		AWTUtilities.setWindowShape(frmTankWar, new RoundRectangle2D.Double(  
+	            0.0D, 0.0D, frmTankWar.getWidth(), frmTankWar.getHeight(), 15.0D,  
 	            15.0D));  
 	}
 }
