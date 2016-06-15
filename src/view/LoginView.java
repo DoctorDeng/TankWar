@@ -29,6 +29,7 @@ import view.viewUtil.CommanButton;
 import view.viewUtil.CommanJPasswordField;
 import view.viewUtil.JframeNoBorder;
 import view.viewUtil.RoundJTextField;
+import view.viewUtil.SetTray;
 
 public class LoginView {
 
@@ -38,7 +39,9 @@ public class LoginView {
 	private JPasswordField user_pwd;
 	private JButton loginButton;
 	private JLabel error_login;
+	private JLabel minimumLabel;
 	private OpenURL openURL = new OpenURL();
+	private SetTray setTray = new SetTray();
 	
 	private final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
 	private final int SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -48,6 +51,8 @@ public class LoginView {
 	private final Image LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/logo.jpg");
 	private final Image TOUXIANG = Toolkit.getDefaultToolkit().getImage("image/loginView/touxiang.png");
 	private final Image TANK_LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/tankLogo.png");
+	private final Image MINIMUM = Toolkit.getDefaultToolkit().getImage("image/loginView/minimum.png");
+	private final Image MINIMUM_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/minimumHover.png");
 	
 	/*
 	 * 用于标识是否被点击过的变量
@@ -84,6 +89,12 @@ public class LoginView {
 	private void initialize() {
 		//JFrame.setDefaultLookAndFeelDecorated(true); 
 		loginFrame = new JFrame();
+//		JWindow widow = new JWindow(loginFrame);
+		/**
+		 * 设置Frame不显示任务栏图标
+		 */
+		loginFrame.setType(java.awt.Window.Type.UTILITY); 
+		setTray.setTrayToFrame(loginFrame);
 		loginFrame.setTitle("Tank  War");
 		loginFrame.setIconImage(TANK_LOGO);
 		loginFrame.setBounds( (SCREEN_WIDTH - 431)/2, (SCREEN_HEIGHT - 325)/2, 431, 325);
@@ -106,6 +117,11 @@ public class LoginView {
 		logoLabel.setIcon(new ImageIcon(LOGO));
 		logoLabel.setBounds(66, 50, 319, 110);
 		panel.add(logoLabel);
+		
+		minimumLabel = new JLabel("");
+		minimumLabel.setIcon(new ImageIcon(MINIMUM));
+		minimumLabel.setBounds(373, -4, 30, 30);
+		panel.add(minimumLabel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(235, 242, 249));
@@ -177,6 +193,20 @@ public class LoginView {
 			}
 		});
 		
+		minimumLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				minimumLabel.setIcon(new ImageIcon(MINIMUM_HOVER));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				minimumLabel.setIcon(new ImageIcon(MINIMUM));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loginFrame.setVisible(false);
+			}
+		});
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				verifyUser();
@@ -221,7 +251,7 @@ public class LoginView {
 	            15.0D));  
 	}
 	
-	public void verifyUser() {
+	private void verifyUser() {
 		if (isClick == false) {
 			isClick = true;
 			if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())

@@ -1,11 +1,15 @@
 package view;
 
 import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JFrame;
 
+import com.sun.awt.AWTUtilities;
+
 import game.gameRun.GameListener;
 import game.gameRun.GamePaint;
+import view.viewUtil.JframeNoBorder;
 /**
  * 
  * @author Doctor邓
@@ -49,6 +53,13 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(gamePanel);
 		addKeyListener(listener);
+//		new JframeNoBorder().noBorder(this);
+//		/**
+//		 * 设置窗体为圆角矩形
+//		 */
+//		AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(  
+//	            0.0D, 0.0D, this.getWidth(), this.getHeight()-20, 15.0D,  
+//	            15.0D));  
 		setVisible(true);
 	}
 	

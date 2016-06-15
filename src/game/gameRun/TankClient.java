@@ -2,6 +2,8 @@ package game.gameRun;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -200,7 +202,8 @@ public class TankClient {
 		panel.setLayout(null);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon("E:\\win10\\desktop\\test\\image\\menu\\gameHelp.PNG"));
+		Image image = Toolkit.getDefaultToolkit().getImage("image/menu/gameHelp.PNG");
+		label.setIcon(new ImageIcon(image));
 		label.setBounds(10, 36, 274, 130);
 		panel.add(label);
 		/**
