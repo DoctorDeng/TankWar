@@ -1,4 +1,4 @@
-package view.viewUtil;
+package view.reference;
 
 import java.awt.AWTException;
 import java.awt.Image;
