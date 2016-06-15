@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,16 +32,29 @@ import view.viewUtil.RoundJTextField;
 
 public class LoginView {
 
-	private JFrame frmTankWar;
-	private VerifyUserAction verifyUser;
+	private JFrame loginFrame;
+	private VerifyUserAction verifyUser = new VerifyUserAction();;
 	private JTextField user_account;
 	private JPasswordField user_pwd;
 	private JButton loginButton;
+	private JLabel error_login;
 	private OpenURL openURL = new OpenURL();
 	
 	private final int SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
 	private final int SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
-
+	
+	private final Image CLOSE = Toolkit.getDefaultToolkit().getImage("image/loginView/close.png");
+	private final Image CLOSE_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/closeRed.png");
+	private final Image LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/logo.jpg");
+	private final Image TOUXIANG = Toolkit.getDefaultToolkit().getImage("image/loginView/touxiang.png");
+	private final Image TANK_LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/tankLogo.png");
+	
+	/*
+	 * 用于标识是否被点击过的变量
+	 * false : 未被点击多
+	 * true  : 被点击过 
+	 */
+	private boolean isClick = false;
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +63,7 @@ public class LoginView {
 			public void run() {
 				try {
 					LoginView window = new LoginView();
-					window.frmTankWar.setVisible(true);
+					window.loginFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,45 +83,41 @@ public class LoginView {
 	 */
 	private void initialize() {
 		//JFrame.setDefaultLookAndFeelDecorated(true); 
-		frmTankWar = new JFrame();
-		frmTankWar.setTitle("Tank  War");
-		frmTankWar.setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\win10\\desktop\\tankLogo.png"));
-		frmTankWar.setBounds( (SCREEN_WIDTH - 431)/2, (SCREEN_HEIGHT - 325)/2, 431, 325);
-		frmTankWar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmTankWar.setResizable(false);
-		frmTankWar.getContentPane().setLayout(null);
-		
-		JButton login = new JButton("登陆");
-		
-		login.setBounds(212, 342, 93, 23);
-		frmTankWar.getContentPane().add(login);
+		loginFrame = new JFrame();
+		loginFrame.setTitle("Tank  War");
+		loginFrame.setIconImage(TANK_LOGO);
+		loginFrame.setBounds( (SCREEN_WIDTH - 431)/2, (SCREEN_HEIGHT - 325)/2, 431, 325);
+		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginFrame.setResizable(false);
+		loginFrame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(22, 154, 218));
 		panel.setBounds(0, 0, 436, 181);
-		frmTankWar.getContentPane().add(panel);
+		loginFrame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel closeLabel = new JLabel("");
-		closeLabel.setIcon(new ImageIcon("E:\\win10\\desktop\\close.png"));
+		closeLabel.setIcon(new ImageIcon(CLOSE));
 		closeLabel.setBounds(403, -2, 30, 30);
 		panel.add(closeLabel);
 		
 		JLabel logoLabel = new JLabel("");
-		logoLabel.setIcon(new ImageIcon("E:\\win10\\desktop\\logo.jpg"));
-		logoLabel.setBounds(66, 38, 319, 110);
+		logoLabel.setIcon(new ImageIcon(LOGO));
+		logoLabel.setBounds(66, 50, 319, 110);
 		panel.add(logoLabel);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(235, 242, 249));
 		panel_1.setBounds(0, 182, 436, 150);
-		frmTankWar.getContentPane().add(panel_1);
+		loginFrame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		user_account = new RoundJTextField();
+		user_account.setText("  ");
 //		textField.setBorder();
 		user_account.setForeground(new Color(0, 0, 0));
-		user_account.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		user_account.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		user_account.setBounds(130, 17, 200, 30);
 		panel_1.add(user_account);
 		user_account.setColumns(10);
@@ -142,11 +152,11 @@ public class LoginView {
 		panel_1.add(changePwdLabel);
 		
 		JLabel headLabel = new JLabel("");
-		headLabel.setIcon(new ImageIcon("E:\\win10\\desktop\\touxiang.png"));
+		headLabel.setIcon(new ImageIcon(TOUXIANG));
 		headLabel.setBounds(28, 10, 80, 89);
 		panel_1.add(headLabel);
 		
-		JLabel error_login = new JLabel("");
+		error_login = new JLabel("");
 		error_login.setForeground(Color.RED);
 		error_login.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		error_login.setBounds(130, 76, 200, 23);
@@ -155,39 +165,21 @@ public class LoginView {
 		closeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				closeLabel.setIcon(new ImageIcon("E:\\win10\\desktop\\closeRed.png"));
+				closeLabel.setIcon(new ImageIcon(CLOSE_HOVER));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				closeLabel.setIcon(new ImageIcon("E:\\win10\\desktop\\close.png"));
+				closeLabel.setIcon(new ImageIcon(CLOSE));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}
 		});
+		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verifyUser = new VerifyUserAction();
-				if (verifyUser.verify(user_account.getText(), user_pwd.getText())) {
-					
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								TankClient tankClient = new TankClient();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-					/**
-					 * 登陆成功后，释放登陆窗口
-					 */
-					frmTankWar.dispose();
-				}
-				else {
-					error_login.setText("用户名或密码错误请重新输入！");
-				}
+				verifyUser();
 			}
 		});
 		signLabel.addMouseListener(new MouseAdapter() {
@@ -201,8 +193,7 @@ public class LoginView {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				 JDesktopPane.("www.baidu.com");
-				openURL.gotoUrl("www.baidu.com");
+				openURL.gotoUrl("http://doctordeng.github.io/signUp.html");
 			}
 		});
 		
@@ -217,42 +208,47 @@ public class LoginView {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				openURL.gotoUrl("www.baidu.com");
+				openURL.gotoUrl("http://doctordeng.github.io/changePwd.html");
 			}
 		});
-		/**
-		 * 验证用户名和密码是否正确
-		 */
-		login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				verifyUser = new VerifyUserAction();
-				if (verifyUser.verify(user_account.getText(), user_pwd.getText())) {
-					
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								TankClient tankClient = new TankClient();
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-					/**
-					 * 登陆成功后，释放登陆窗口
-					 */
-					frmTankWar.dispose();
-				}
-				else {
-					error_login.setText("用户名或密码错误请重新输入！");
-				}
-			}
-		});
-		new JframeNoBorder().noBorder(frmTankWar);
+		
+		new JframeNoBorder().noBorder(loginFrame);
 		/**
 		 * 设置窗体为圆角矩形
 		 */
-		AWTUtilities.setWindowShape(frmTankWar, new RoundRectangle2D.Double(  
-	            0.0D, 0.0D, frmTankWar.getWidth(), frmTankWar.getHeight(), 15.0D,  
+		AWTUtilities.setWindowShape(loginFrame, new RoundRectangle2D.Double(  
+	            0.0D, 0.0D, loginFrame.getWidth(), loginFrame.getHeight(), 15.0D,  
 	            15.0D));  
+	}
+	
+	public void verifyUser() {
+		if (isClick == false) {
+			isClick = true;
+			if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())
+					|| null == user_account.getText().trim() || null ==user_pwd.getText().trim()) {
+				error_login.setText("用户名或密码为空,请重新输入");
+				isClick = false;
+			}
+			else if (verifyUser.verify(user_account.getText().trim(), user_pwd.getText())) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							TankClient tankClient = new TankClient();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				/**
+				 * 登陆成功后，释放登陆窗口
+				 */
+				loginFrame.dispose();
+				isClick = false;
+			} 
+			else {
+				error_login.setText("用户名或密码错误,请重新输入！");
+				isClick = false;
+			}
+		}
 	}
 }
