@@ -29,8 +29,8 @@ public class GameAssistInfor extends Thread{
 					enemyNum.setText(String.valueOf(admin.getEnemyNum() + admin.getAITanks().size()));
 				} 
 				else {
-					score.setText("???");
-					enemyNum.setText("???");
+					score.setText("? ? ?");
+					enemyNum.setText("? ? ?");
 				}
 				sleep(300);
 			}

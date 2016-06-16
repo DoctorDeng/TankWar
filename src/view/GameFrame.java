@@ -15,6 +15,7 @@ import view.viewUtil.JframeNoBorder;
  * @author Doctor邓
  * 游戏主界面
  */
+import view.viewUtil.SetTray;
 public class GameFrame extends JFrame {
 	
 	/**
@@ -28,6 +29,7 @@ public class GameFrame extends JFrame {
 	private final int Y;
 	private final int ScreenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	private final int ScreenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	private SetTray setTray;
 	
 	//游戏画面
 	private GamePanel gamePanel;
@@ -38,6 +40,7 @@ public class GameFrame extends JFrame {
 		Y = (ScreenHeight - GameHeight)/2;
 		gamePanel = new GamePanel(gamePaint);
 		this.listener = listener;
+		setTray = new SetTray();
 		viewInit();
 	}
 	
@@ -53,13 +56,16 @@ public class GameFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(gamePanel);
 		addKeyListener(listener);
-//		new JframeNoBorder().noBorder(this);
-//		/**
-//		 * 设置窗体为圆角矩形
-//		 */
-//		AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(  
-//	            0.0D, 0.0D, this.getWidth(), this.getHeight()-20, 15.0D,  
-//	            15.0D));  
+		this.setType(java.awt.Window.Type.UTILITY); 
+		setTray.setTrayToFrame(this);
+		
+		new JframeNoBorder().noBorder(this);
+		/**
+		 * 设置窗体为圆角矩形
+		 */
+		AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(  
+	            0.0D, 0.0D, this.getWidth()-6, this.getHeight()-20, 15.0D,  
+	            15.0D));  
 		setVisible(true);
 	}
 	

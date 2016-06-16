@@ -21,11 +21,11 @@ public class CommanButton extends JButton {
 	/**
 	 * 矩形边框的圆角弧度
 	 */
-	private final int HU_1 = 5;
-	private final int HU_2 = 5;
-	private final Color COLOR = new Color(9,163,220);
-	private final Color COLOR_ENTERED = new Color(60, 195, 245);
-	private final Color COLOR_EXITED = new Color(9, 140, 188);
+	private int HU_1 = 5;
+	private int HU_2 = 5;
+	private Color COLOR = new Color(9,163,220);
+	private Color COLOR_ENTERED = new Color(60, 195, 245);
+	private Color COLOR_EXITED = new Color(9, 140, 188);
 	
 	private boolean hover;
 	private boolean click;
@@ -72,7 +72,6 @@ public class CommanButton extends JButton {
 		g2d.clip(r2d);
 		g2d.setColor(COLOR);
 		g2d.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1,  HU_1,  HU_2);
-//		g2d.setColor(getBackground());
 		
 		if (hover) {
 			RoundRectangle2D.Float r2d2 = new RoundRectangle2D.Float(0, 0,
@@ -95,6 +94,51 @@ public class CommanButton extends JButton {
 		
 		g2d.dispose();
 		super.paintComponent(g);
+	}
+	
+	@Override
+	protected void paintBorder(Graphics g) {
+		
+	}
+
+	public Color getCOLOR() {
+		return COLOR;
+	}
+
+	public void setCOLOR(Color cOLOR) {
+		COLOR = cOLOR;
+	}
+
+	public Color getCOLOR_ENTERED() {
+		return COLOR_ENTERED;
+	}
+
+	public void setCOLOR_ENTERED(Color cOLOR_ENTERED) {
+		COLOR_ENTERED = cOLOR_ENTERED;
+	}
+
+	public Color getCOLOR_EXITED() {
+		return COLOR_EXITED;
+	}
+
+	public void setCOLOR_EXITED(Color cOLOR_EXITED) {
+		COLOR_EXITED = cOLOR_EXITED;
+	}
+
+	public int getHU_1() {
+		return HU_1;
+	}
+
+	public int getHU_2() {
+		return HU_2;
+	}
+
+	public void setHU_1(int hU_1) {
+		HU_1 = hU_1;
+	}
+
+	public void setHU_2(int hU_2) {
+		HU_2 = hU_2;
 	}
 	
 //	public static void main(String[] args){

@@ -12,11 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 
 import game.dataEntity.GameMap;
 import game.gameAssist.GameAssistAI;
@@ -25,6 +20,9 @@ import game.gameAssist.GameAssistProp;
 import game.gameAssist.GameAssistWall;
 import game.model.GameFactory;
 import view.GameFrame;
+import view.viewUtil.CommanButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * 
@@ -42,8 +40,16 @@ public class TankClient {
 	private GameAssistAI aiAssist;
 	private GameAssistWall wallAssist;
 	private GameAssistInfor inforAssist;
-	private JLabel score = new JLabel("???");;
-	private JLabel enemyNum = new JLabel("???");;
+	private JLabel score = new JLabel("? ? ?");;
+	private JLabel enemyNum = new JLabel("? ? ?");;
+	
+	private final Image CLOSE = Toolkit.getDefaultToolkit().getImage("image/loginView/close.png");
+	private final Image CLOSE_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/closeRed.png");
+	private final Image LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/logo.jpg");
+	private final Image TOUXIANG = Toolkit.getDefaultToolkit().getImage("image/loginView/touxiang.png");
+	private final Image TANK_LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/tankLogo.png");
+	private final Image MINIMUM = Toolkit.getDefaultToolkit().getImage("image/loginView/minimum.png");
+	private final Image MINIMUM_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/minimumHover.png");
 	
 	/**
 	 * 游戏是否在进行的标识，true为在进行，false为已经结束
@@ -136,76 +142,177 @@ public class TankClient {
 	 */
 	private void viewInit() {
 		gameFrame = new GameFrame(gamePaint, listener);
-		gameFrame.setBackground(new Color(255, 255, 255));
+		gameFrame.setBackground(new Color(0, 0, 0));
 		
 		JPanel inforPanel = new JPanel();
 		inforPanel.setToolTipText("");
-		inforPanel.setBackground(new Color(255, 255, 255));
-		inforPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(143, 188, 143), new Color(143, 188, 143), new Color(143, 188, 143), new Color(143, 188, 143)));
-		inforPanel.setBounds(800, 0, 294, 172);
+		inforPanel.setBackground(new Color(255, 153, 0));
+		inforPanel.setBounds(800, 29, 294, 191);
 		gameFrame.getContentPane().add(inforPanel);
 		inforPanel.setLayout(null);
+		Image image1 = Toolkit.getDefaultToolkit().getImage("image/startGame.png");
+		Image image2 = image1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		
-		JLabel scoreLabel = new JLabel("游戏分数");
+		JPanel scorePanel = new JPanel();
+		scorePanel.setBackground(new Color(204,51, 204));
+		scorePanel.setBounds(0, 91, 294, 50);
+		inforPanel.add(scorePanel);
+		scorePanel.setLayout(null);
+		
+		JLabel scoreLabel = new JLabel("Score ");
+		scoreLabel.setBounds(0, 0, 152, 50);
+		scorePanel.add(scoreLabel);
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		scoreLabel.setForeground(new Color(0, 128, 0));
-		scoreLabel.setFont(new Font("楷体", Font.PLAIN, 18));
-		scoreLabel.setBounds(10, 10, 89, 28);
-		inforPanel.add(scoreLabel);
+		scoreLabel.setForeground(new Color(255, 255, 255));
+		scoreLabel.setFont(new Font("Segoe Print", Font.BOLD | Font.ITALIC, 20));
+		score.setBounds(147, -2, 147, 50);
+		scorePanel.add(score);
 		
-		JLabel lblNewLabel = new JLabel("敌人剩余数量");
-		lblNewLabel.setForeground(new Color(153, 50, 204));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("楷体", Font.PLAIN, 18));
-		lblNewLabel.setBounds(10, 95, 134, 28);
-		inforPanel.add(lblNewLabel);
-		
-		score.setForeground(new Color(255, 0, 0));
-		score.setFont(new Font("宋体", Font.PLAIN, 30));
+		score.setForeground(new Color(255, 255, 255));
+		score.setFont(new Font("MV Boli", Font.PLAIN, 30));
 		score.setHorizontalAlignment(SwingConstants.CENTER);
-		score.setBounds(101, 48, 89, 37);
-		inforPanel.add(score);
+		Image image3 = Toolkit.getDefaultToolkit().getImage("image/grade.png");
+		
+		JPanel aiNumPanel = new JPanel();
+		aiNumPanel.setBackground(new Color(204, 51, 204));
+		aiNumPanel.setBounds(0, 141, 294, 50);
+		inforPanel.add(aiNumPanel);
+		aiNumPanel.setLayout(null);
+		
+		JLabel aiNumLabel = new JLabel("Ai Num");
+		aiNumLabel.setBounds(0, 0, 147, 50);
+		aiNumPanel.add(aiNumLabel);
+		aiNumLabel.setForeground(new Color(255, 255, 255));
+		aiNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		aiNumLabel.setFont(new Font("Segoe Print", Font.BOLD | Font.ITALIC, 20));
+		enemyNum.setBounds(147, 0, 147, 50);
+		aiNumPanel.add(enemyNum);
 		
 		enemyNum.setHorizontalAlignment(SwingConstants.CENTER);
-		enemyNum.setForeground(Color.RED);
-		enemyNum.setFont(new Font("宋体", Font.PLAIN, 30));
-		enemyNum.setBounds(101, 128, 89, 37);
-		inforPanel.add(enemyNum);
+		enemyNum.setForeground(new Color(255, 255, 255));
+		enemyNum.setFont(new Font("MV Boli", Font.PLAIN, 30));
+		
+		Image animalImage1 = Toolkit.getDefaultToolkit().getImage("image/animal/dog1.png");
+		Image animalImage2 = Toolkit.getDefaultToolkit().getImage("image/animal/cat6.png");
+		Image animalImage3 = Toolkit.getDefaultToolkit().getImage("image/animal/dog2.png");
+		
+		JLabel animal1 = new JLabel("");
+		animal1.setBounds(15, 10, 70, 70);
+		animal1.setIcon(new ImageIcon(imageAdapt(animalImage1, animal1.getWidth(), animal1.getHeight())));
+		inforPanel.add(animal1);
+		
+		JLabel animal2 = new JLabel("");
+		animal2.setBounds(115, 10, 70, 70);
+		animal2.setIcon(new ImageIcon(imageAdapt(animalImage2, animal2.getWidth(), animal2.getHeight())));
+		inforPanel.add(animal2);
+		
+		JLabel animal3 = new JLabel("");
+		animal3.setBounds(215, 10, 70, 70);
+		animal3.setIcon(new ImageIcon(imageAdapt(animalImage3, animal3.getWidth(), animal3.getHeight())));
+		inforPanel.add(animal3);
 		
 		JPanel setPanel = new JPanel();
-		setPanel.setBorder(new TitledBorder(new LineBorder(new Color(128, 0, 128), 3), "\u6E38\u620F\u8BBE\u7F6E", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(30, 144, 255)));
-		setPanel.setBounds(800, 175, 294, 280);
+		setPanel.setBackground(new Color(255, 255, 255));
+		setPanel.setBounds(800, 220, 294, 255);
 		gameFrame.getContentPane().add(setPanel);
 		setPanel.setLayout(null);
 		
-		JButton startGame = new JButton("开始游戏");
-		
-		startGame.setBounds(38, 60, 93, 23);
+		CommanButton startGame = new CommanButton("开始游戏");
+		startGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		startGame.setHU_1(0);
+		startGame.setHU_2(0);
+		startGame.setCOLOR(new Color(153, 204, 51));
+		startGame.setBounds(0, 0, 148, 132);
 		setPanel.add(startGame);
 		
-		JButton stopGame = new JButton("停止(开始)游戏");
-		stopGame.setBounds(163, 60, 121, 23);
+		CommanButton stopGame = new CommanButton("停止(开始)游戏");
+		stopGame.setText("停止(开始)");
+		stopGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		stopGame.setHU_1(0);
+		stopGame.setHU_2(0);
+		stopGame.setCOLOR(new Color(255, 102, 51));
+		stopGame.setBounds(147, 0, 148, 132);
 		setPanel.add(stopGame);
 		
-		JButton restartGame = new JButton("重新开始");
-		restartGame.setBounds(38, 158, 93, 23);
+		CommanButton restartGame = new CommanButton("重新开始");
+		restartGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		restartGame.setHU_1(0);
+		restartGame.setHU_2(0);
+		restartGame.setCOLOR(new Color(204, 0, 255));
+		restartGame.setBounds(0, 131, 148, 125);
 		setPanel.add(restartGame);
 		
-		JButton rankGame = new JButton("排行榜");
-		rankGame.setBounds(163, 158, 93, 23);
+		CommanButton rankGame = new CommanButton("排行榜");
+		rankGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		rankGame.setHU_1(0);
+		rankGame.setHU_2(0);
+		rankGame.setCOLOR(new Color(255, 51, 204));
+		rankGame.setBounds(147, 131, 148, 125);
 		setPanel.add(rankGame);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 255, 255)), "\u6E38\u620F\u5E2E\u52A9", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(30, 144, 255)));
-		panel.setBounds(800, 465, 294, 197);
-		gameFrame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel hepPanel = new JPanel();
+		hepPanel.setBackground(new Color(22, 154, 218));
+		hepPanel.setBounds(800, 473, 294, 208);
+		gameFrame.getContentPane().add(hepPanel);
+		hepPanel.setLayout(null);
 		
-		JLabel label = new JLabel("");
-		Image image = Toolkit.getDefaultToolkit().getImage("image/menu/gameHelp.PNG");
-		label.setIcon(new ImageIcon(image));
-		label.setBounds(10, 36, 274, 130);
-		panel.add(label);
+		JLabel helpLabel = new JLabel("");
+		Image image = Toolkit.getDefaultToolkit().getImage("image/gameHelp.jpg");
+		helpLabel.setBounds(0, 0, 294, 208);
+		helpLabel.setIcon(new ImageIcon(imageAdapt(image, helpLabel.getWidth(), helpLabel.getHeight())));
+		hepPanel.add(helpLabel);
+//		inforBgLabel.setIcon(new ImageIcon(imageAdapt(inforBg, inforBgLabel.getWidth(), inforBgLabel.getHeight())));
+		
+		JPanel closePanel = new JPanel();
+		closePanel.setBackground(new Color(22,154,218));
+		closePanel.setBounds(800, -1, 294, 30);
+		gameFrame.getContentPane().add(closePanel);
+		closePanel.setLayout(null);
+		
+		JLabel closeLabel = new JLabel("");
+		closeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				closeLabel.setIcon(new ImageIcon(CLOSE_HOVER));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				closeLabel.setIcon(new ImageIcon(CLOSE));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		closeLabel.setIcon(new ImageIcon(CLOSE));
+		closeLabel.setBounds(265, -1, 30, 30);
+		closePanel.add(closeLabel);
+		
+		JLabel minimumLabel = new JLabel("");
+		minimumLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				minimumLabel.setIcon(new ImageIcon(MINIMUM_HOVER));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				minimumLabel.setIcon(new ImageIcon(MINIMUM));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gameFrame.setVisible(false);
+			}
+		});
+		minimumLabel.setIcon(new ImageIcon(MINIMUM));
+		minimumLabel.setBounds(235, -1, 30, 30);
+		closePanel.add(minimumLabel);
+		
+		JLabel lblAthuor = new JLabel("         --By  Docotr");
+		lblAthuor.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblAthuor.setForeground(new Color(255, 255, 255));
+		lblAthuor.setFont(new Font("MV Boli", Font.BOLD, 18));
+		lblAthuor.setBounds(0, -1, 225, 30);
+		closePanel.add(lblAthuor);
 		/**
 		 * 为每一个按钮都添加键盘监听事件，这样就不会再点击按钮后，
 		 * jframe中的键盘事件失灵导致游戏中的坦克无法通过键盘控制移动
@@ -288,5 +395,10 @@ public class TankClient {
 
 	public DataAdmin getAdmin() {
 		return admin;
+	}
+	
+	public Image imageAdapt(Image image,int width, int height) {
+		Image image1 = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return image1;
 	}
 }
