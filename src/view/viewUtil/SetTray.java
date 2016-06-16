@@ -17,13 +17,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class SetTray {
+	private TrayIcon trayIcon;
+	private SystemTray tray;
 	
 	public void setTrayToFrame(JFrame jframe) {
 		if (SystemTray.isSupported()) {
-			SystemTray tray = SystemTray.getSystemTray();
+			tray = SystemTray.getSystemTray();
 			Image imageIco = Toolkit.getDefaultToolkit().getImage("image/loginView/gam2.png");
 			ImageIcon icon = new ImageIcon(imageIco);
-			TrayIcon trayIcon = new TrayIcon(icon.getImage());
+			trayIcon = new TrayIcon(icon.getImage());
 			/**
 			 * 设置图片大小自适应，不然图片无法显示
 			 */
@@ -75,5 +77,9 @@ public class SetTray {
 	      {
 	         JOptionPane.showMessageDialog(null, "操作系统不支持托盘");
 	      }
+	}
+	
+	public void removeTray() {
+		tray.remove(trayIcon);
 	}
 }

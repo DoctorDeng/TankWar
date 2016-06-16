@@ -1,4 +1,4 @@
-package view;
+package view.reference;
 
 
 import java.awt.BorderLayout;

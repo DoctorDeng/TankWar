@@ -22,24 +22,34 @@ import javax.swing.SwingConstants;
 
 import com.sun.awt.AWTUtilities;
 
+import bussiness.LoginAction;
 import bussiness.VerifyUserAction;
 import game.gameRun.TankClient;
 import util.OpenURL;
 import view.viewUtil.CommanButton;
 import view.viewUtil.CommanJPasswordField;
 import view.viewUtil.JframeNoBorder;
+import view.viewUtil.LoginCartoon;
 import view.viewUtil.RoundJTextField;
 import view.viewUtil.SetTray;
 
 public class LoginView {
 
 	private JFrame loginFrame;
-	private VerifyUserAction verifyUser = new VerifyUserAction();;
+	private JPanel loginPanel;
+	private JPanel logoPanel;
+	
 	private JTextField user_account;
 	private JPasswordField user_pwd;
 	private JButton loginButton;
 	private JLabel error_login;
 	private JLabel minimumLabel;
+	private JLabel changePwdLabel;
+	private JLabel signLabel;
+	private JButton cancelLogin;
+	private JLabel headLabel;
+	
+	private VerifyUserAction verifyUser = new VerifyUserAction();
 	private OpenURL openURL = new OpenURL();
 	private SetTray setTray = new SetTray();
 	
@@ -89,6 +99,7 @@ public class LoginView {
 	private void initialize() {
 		//JFrame.setDefaultLookAndFeelDecorated(true); 
 		loginFrame = new JFrame();
+		loginFrame.setBackground(new Color(22, 154, 218));
 //		JWindow widow = new JWindow(loginFrame);
 		/**
 		 * 设置Frame不显示任务栏图标
@@ -102,46 +113,58 @@ public class LoginView {
 		loginFrame.setResizable(false);
 		loginFrame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(22, 154, 218));
-		panel.setBounds(0, 0, 436, 181);
-		loginFrame.getContentPane().add(panel);
-		panel.setLayout(null);
+		logoPanel = new JPanel();
+		logoPanel.setBackground(new Color(22, 154, 218));
+		logoPanel.setBounds(0, 0, 436, 181);
+		loginFrame.getContentPane().add(logoPanel);
+		logoPanel.setLayout(null);
 		
 		JLabel closeLabel = new JLabel("");
 		closeLabel.setIcon(new ImageIcon(CLOSE));
 		closeLabel.setBounds(403, -2, 30, 30);
-		panel.add(closeLabel);
+		logoPanel.add(closeLabel);
 		
 		JLabel logoLabel = new JLabel("");
 		logoLabel.setIcon(new ImageIcon(LOGO));
 		logoLabel.setBounds(66, 50, 319, 110);
-		panel.add(logoLabel);
+		logoPanel.add(logoLabel);
 		
 		minimumLabel = new JLabel("");
 		minimumLabel.setIcon(new ImageIcon(MINIMUM));
 		minimumLabel.setBounds(373, -4, 30, 30);
-		panel.add(minimumLabel);
+		logoPanel.add(minimumLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(235, 242, 249));
-		panel_1.setBounds(0, 182, 436, 150);
-		loginFrame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		loginPanel = new JPanel();
+		loginPanel.setBackground(new Color(235, 242, 249));
+		loginPanel.setBounds(0, 182, 436, 150);
+		loginFrame.getContentPane().add(loginPanel);
+		loginPanel.setLayout(null);
 		
 		user_account = new RoundJTextField();
+		user_account.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				user_account.setText("  ");
+			}
+		});
 		user_account.setText("  ");
 //		textField.setBorder();
 		user_account.setForeground(new Color(0, 0, 0));
 		user_account.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		user_account.setBounds(130, 17, 200, 30);
-		panel_1.add(user_account);
+		loginPanel.add(user_account);
 		user_account.setColumns(10);
 		
 		user_pwd = new CommanJPasswordField();
+		user_pwd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				user_pwd.setText("");
+			}
+		});
 		user_pwd.setFont(new Font("微软雅黑", Font.PLAIN, 19));
 		user_pwd.setBounds(130, 47, 200, 30);
-		panel_1.add(user_pwd);
+		loginPanel.add(user_pwd);
 		
 		loginButton = new CommanButton("登     陆");
 //		loginButton.setMargin(new Insets(0,0,0,0));
@@ -151,32 +174,43 @@ public class LoginView {
 		loginButton.setBackground(new Color(9, 163, 220));
 //		loginButton.setFocusPainted(false);
 		loginButton.setBounds(130, 99, 200, 30);
-		panel_1.add(loginButton);
+		loginPanel.add(loginButton);
 		
-		JLabel signLabel = new JLabel("注册账号");
+		cancelLogin = new CommanButton("取   消");
+		cancelLogin.setBorder(null);
+		cancelLogin.setForeground(new Color(240, 248, 255));
+		cancelLogin.setFont(new Font("微软雅黑", Font.PLAIN, 13));
+		cancelLogin.setBackground(new Color(9, 163, 220));
+//		loginButton.setFocusPainted(false);
+		cancelLogin.setBounds(130, 99, 200, 30);
+		cancelLogin.setVisible(false);
+		loginPanel.add(cancelLogin);
+		
+		
+		signLabel = new JLabel("注册账号");
 		signLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		signLabel.setForeground(new Color(39, 134, 228));
 		signLabel.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		signLabel.setBounds(340, 23, 54, 15);
-		panel_1.add(signLabel);
+		loginPanel.add(signLabel);
 		
-		JLabel changePwdLabel = new JLabel("找回密码");
+		changePwdLabel = new JLabel("找回密码");
 		changePwdLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		changePwdLabel.setForeground(new Color(39, 134, 228));
 		changePwdLabel.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		changePwdLabel.setBounds(340, 53, 54, 20);
-		panel_1.add(changePwdLabel);
+		loginPanel.add(changePwdLabel);
 		
-		JLabel headLabel = new JLabel("");
+		headLabel = new JLabel("");
 		headLabel.setIcon(new ImageIcon(TOUXIANG));
 		headLabel.setBounds(28, 10, 80, 89);
-		panel_1.add(headLabel);
+		loginPanel.add(headLabel);
 		
 		error_login = new JLabel("");
 		error_login.setForeground(Color.RED);
 		error_login.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		error_login.setBounds(130, 76, 200, 23);
-		panel_1.add(error_login);
+		loginPanel.add(error_login);
 		
 		closeLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -209,7 +243,7 @@ public class LoginView {
 		});
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verifyUser();
+				login();
 			}
 		});
 		signLabel.addMouseListener(new MouseAdapter() {
@@ -251,7 +285,11 @@ public class LoginView {
 	            15.0D));  
 	}
 	
-	private void verifyUser() {
+	private void login() {
+//		LoginAction loginAction = new LoginAction(this);
+//		loginAction.start();
+//		loginCartoon();
+//		
 		if (isClick == false) {
 			isClick = true;
 			if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())
@@ -270,9 +308,9 @@ public class LoginView {
 					}
 				});
 				/**
-				 * 登陆成功后，释放登陆窗口
+				 * 登陆成功后，释放登陆窗口,并退出托盘图标
 				 */
-				loginFrame.dispose();
+				exit();
 				isClick = false;
 			} 
 			else {
@@ -280,5 +318,76 @@ public class LoginView {
 				isClick = false;
 			}
 		}
+	}
+	
+	/**
+	 * 释放当前窗口和相关的托盘
+	 */
+	public void exit() {
+		loginFrame.dispose();
+		setTray.removeTray();
+	}
+	
+	/**
+	 * 登陆动画
+	 */
+	public void loginCartoon() {
+		user_account.setVisible(false);
+		user_pwd.setVisible(false);
+		signLabel.setVisible(false);
+		changePwdLabel.setVisible(false);
+		headLabel.setVisible(false);
+		
+	}
+	
+	/**
+	 * 取消登录动画
+	 */
+	public void cancelLoginCartoon() {
+		user_account.setVisible(true);
+		user_pwd.setVisible(true);
+		signLabel.setVisible(true);
+		changePwdLabel.setVisible(true);
+		
+	}
+
+	public JTextField getUser_account() {
+		return user_account;
+	}
+
+	public JPasswordField getUser_pwd() {
+		return user_pwd;
+	}
+
+	public JButton getLoginButton() {
+		return loginButton;
+	}
+
+	public JLabel getError_login() {
+		return error_login;
+	}
+
+	public JLabel getChangePwdLabel() {
+		return changePwdLabel;
+	}
+
+	public JLabel getSignLabel() {
+		return signLabel;
+	}
+
+	public JFrame getLoginFrame() {
+		return loginFrame;
+	}
+
+	public Image getTOUXIANG() {
+		return TOUXIANG;
+	}
+
+	public JPanel getLoginPanel() {
+		return loginPanel;
+	}
+
+	public JPanel getLogoPanel() {
+		return logoPanel;
 	}
 }
