@@ -374,9 +374,9 @@ public class TankClient {
 		});
 	}
 	
-	public static void main(String[] args) {
-		TankClient gameRun = new TankClient();
-	}
+//	public static void main(String[] args) {
+//		TankClient gameRun = new TankClient();
+//	}
 	
 	/**
 	 * 获得玩家选择游戏的人数
