@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import game.gameRun.GameListener;
+import game.control.GameListener;
 /**
  * 
  * @author Doctor邓

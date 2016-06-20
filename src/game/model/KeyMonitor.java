@@ -3,7 +3,7 @@ package game.model;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import game.gameRun.DataAdmin;
+import game.control.DataAdmin;
 
 /**
  * 键盘监听，获取用户输入，控制MyTank的方向

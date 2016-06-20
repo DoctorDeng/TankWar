@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import game.gameRun.TankClient;
+import game.control.TankClient;
 import view.GamePanel;
 
 public class GameEndCartoon {

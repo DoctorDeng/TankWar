@@ -1,4 +1,4 @@
-package game.gameRun;
+package game.control;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

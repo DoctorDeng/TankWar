@@ -3,10 +3,10 @@ package game.model;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
+import game.control.DataAdmin;
+import game.control.TankClient;
 import game.dataEntity.Direction;
 import game.dataEntity.MyTank;
-import game.gameRun.DataAdmin;
-import game.gameRun.TankClient;
 
 /**
  * 

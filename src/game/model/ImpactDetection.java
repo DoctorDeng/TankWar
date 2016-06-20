@@ -2,13 +2,13 @@ package game.model;
 
 import java.util.List;
 
+import game.control.DataAdmin;
 import game.dataEntity.AITank;
 import game.dataEntity.Bullet;
 import game.dataEntity.GameHome;
 import game.dataEntity.MyTank;
 import game.dataEntity.Prop;
 import game.dataEntity.Wall;
-import game.gameRun.DataAdmin;
 
 /**
  * 

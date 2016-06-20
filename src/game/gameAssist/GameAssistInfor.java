@@ -2,8 +2,8 @@ package game.gameAssist;
 
 import javax.swing.JLabel;
 
-import game.gameRun.DataAdmin;
-import game.gameRun.TankClient;
+import game.control.DataAdmin;
+import game.control.TankClient;
 
 /*
  * 动态的将游戏的相关信息显示出来的线程 

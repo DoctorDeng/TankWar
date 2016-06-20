@@ -19,7 +19,7 @@ import game.dataEntity.Wall;
 /**
  * 
  * @author Doctor邓
- *	存储游戏的数据，并对游戏的数据初始化
+ *	<p>游戏的数据中心,存储游戏的数据<p>
  */
 public class GameData {
 	
@@ -51,6 +51,7 @@ public class GameData {
 		gameMenu = new GameMenu();
 		gameEnd = new GameEndCartoon();
 		score = 0;
+		user = new User();
 	} 
 	
 	public WallCartoon getWallEffects() {
@@ -143,5 +144,13 @@ public class GameData {
 
 	public GameEndCartoon getGameEnd() {
 		return gameEnd;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

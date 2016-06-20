@@ -1,7 +1,7 @@
-package game.gameRun;
+package game.control;
 
 import java.util.List;
-
+import entity.User;
 import game.cartoon.AICartoon;
 import game.cartoon.GameEndCartoon;
 import game.cartoon.WallCartoon;
@@ -17,7 +17,7 @@ import game.model.GameData;
 /**
  * 
  * @author Doctor邓
- * <p>用于对游戏中的存放统一管理。例如：添加AI坦克，添加爆炸对象</p>
+ * <p>用于对游戏中的数据统一管理的数据管理员。</p>
  */
 public class DataAdmin {
 	private GameData gameData;
@@ -26,6 +26,9 @@ public class DataAdmin {
 		gameData = new GameData();
 	}
 	
+	/**
+	 * 清空游戏中的各种数据
+	 */
 	public void clear() {
 		gameData.getMyTanks().clear();
 		gameData.getAiTanks().clear();
@@ -162,5 +165,13 @@ public class DataAdmin {
 	
 	public GameEndCartoon getGameEnd() {
 		return gameData.getGameEnd();
+	}
+	
+	public User getUser() {
+		return gameData.getUser();
+	}
+	
+	public void setUser(User user) {
+		gameData.setUser(user);
 	}
 }

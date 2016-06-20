@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,11 +25,12 @@ import javax.swing.SwingConstants;
 import com.sun.awt.AWTUtilities;
 
 import bussiness.UserAction;
-import game.gameRun.TankClient;
+import entity.User;
+import game.control.TankClient;
 import util.OpenURL;
 import view.viewUtil.CommanButton;
 import view.viewUtil.CommanJPasswordField;
-import view.viewUtil.JframeNoBorder;
+import view.viewUtil.JFrameSet;
 import view.viewUtil.RoundJTextField;
 import view.viewUtil.SetTray;
 
@@ -36,6 +39,7 @@ public class LoginView {
 	private JFrame loginFrame;
 	private JPanel loginPanel;
 	private JPanel logoPanel;
+//	private ScorePointOut pointOut = new ScorePointOut();
 	
 	private JTextField user_account;
 	private JPasswordField user_pwd;
@@ -98,7 +102,6 @@ public class LoginView {
 		//JFrame.setDefaultLookAndFeelDecorated(true); 
 		loginFrame = new JFrame();
 		loginFrame.setBackground(new Color(22, 154, 218));
-//		JWindow widow = new JWindow(loginFrame);
 		/**
 		 * 设置Frame不显示任务栏图标
 		 */
@@ -124,7 +127,7 @@ public class LoginView {
 		
 		JLabel logoLabel = new JLabel("");
 		logoLabel.setIcon(new ImageIcon(LOGO));
-		logoLabel.setBounds(66, 50, 319, 110);
+		logoLabel.setBounds(68, 58, 287, 113);
 		logoPanel.add(logoLabel);
 		
 		minimumLabel = new JLabel("");
@@ -274,7 +277,7 @@ public class LoginView {
 			}
 		});
 		
-		new JframeNoBorder().noBorder(loginFrame);
+		new JFrameSet().noBorder(loginFrame);
 		/**
 		 * 设置窗体为圆角矩形
 		 */
@@ -283,38 +286,55 @@ public class LoginView {
 	            15.0D));  
 	}
 	
-	private void login() {
-//		LoginAction loginAction = new LoginAction(this);
-//		loginAction.start();
-//		loginCartoon();
-//		
+	public void login() {
+		
+		ScorePointOut pointOut = new ScorePointOut();
 		if (isClick == false) {
 			isClick = true;
-			if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())
-					|| null == user_account.getText().trim() || null ==user_pwd.getText().trim()) {
-				error_login.setText("用户名或密码为空,请重新输入");
-				isClick = false;
-			}
-			else if (verifyUser.verifyUser(user_account.getText().trim(), user_pwd.getText())) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							TankClient tankClient = new TankClient();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				/**
-				 * 登陆成功后，释放登陆窗口,并退出托盘图标
-				 */
-				exit();
-				isClick = false;
-			} 
-			else {
-				error_login.setText("用户名或密码错误,请重新输入！");
-				isClick = false;
-			}
+			pointOut.setVisible(true);
+			loginFrame.setVisible(false);
+			/**
+			 * 在指定时间后执行登陆验证操作
+			 */
+			Timer timer = new Timer();  
+	        timer.schedule(new TimerTask() {  
+	            public void run() {  
+	            	if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())
+	    					|| null == user_account.getText().trim() || null ==user_pwd.getText().trim()) {
+	    				
+	    				error_login.setText("用户名或密码为空,请重新输入");
+	    				isClick = false;
+	    				pointOut.setVisible(false);
+	    				loginFrame.setVisible(true);
+	    			}
+	    			else if (verifyUser.verifyUser(user_account.getText().trim(), user_pwd.getText())) {
+	    				EventQueue.invokeLater(new Runnable() {
+	    					public void run() {
+	    						try {
+	    							User user = new User(user_account.getText().trim(),user_pwd.getText());
+	    							TankClient tankClient = new TankClient(user);
+	    						} catch (Exception e) {
+	    							e.printStackTrace();
+	    						}
+	    					}
+	    				});
+	    				/**
+	    				 * 登陆成功后，释放登陆窗口,并退出托盘图标
+	    				 */
+	    				exit();
+	    				isClick = false;
+	    				pointOut.dispose();
+	    			} 
+	    			else {
+	    				error_login.setText("用户名或密码错误,请重新输入！");
+	    				isClick = false;
+	    				pointOut.setVisible(false);;
+	    				loginFrame.setVisible(true);
+	    			} 
+	            }  
+	        }, 3000);
+			
+			
 		}
 	}
 	
@@ -326,29 +346,6 @@ public class LoginView {
 		setTray.removeTray();
 	}
 	
-	/**
-	 * 登陆动画
-	 */
-	public void loginCartoon() {
-		user_account.setVisible(false);
-		user_pwd.setVisible(false);
-		signLabel.setVisible(false);
-		changePwdLabel.setVisible(false);
-		headLabel.setVisible(false);
-		
-	}
-	
-	/**
-	 * 取消登录动画
-	 */
-	public void cancelLoginCartoon() {
-		user_account.setVisible(true);
-		user_pwd.setVisible(true);
-		signLabel.setVisible(true);
-		changePwdLabel.setVisible(true);
-		
-	}
-
 	public JTextField getUser_account() {
 		return user_account;
 	}

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-import game.gameRun.GamePaint;
-import game.gameRun.GameRepaint;
+import game.control.GamePaint;
+import game.control.GameRepaint;
 
 public class GamePanel extends JPanel{
 	/**

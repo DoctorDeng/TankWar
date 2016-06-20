@@ -7,9 +7,9 @@ import java.awt.Toolkit;
 import java.util.List;
 import java.util.Random;
 
+import game.control.DataAdmin;
+import game.control.GameFactory;
 import game.gameAssist.GameAssistStop;
-import game.gameRun.DataAdmin;
-import game.gameRun.GameFactory;
 
 /**
  * 

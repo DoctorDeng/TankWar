@@ -10,7 +10,7 @@ public class User {
 	 */
 	private String user_account;
 	private String user_pwd;
-	private int user_score;
+	private int user_score = 0;
 	
 	public User() {
 		
@@ -19,7 +19,6 @@ public class User {
 	public User(String user_account, String user_pwd) {
 		this.user_account = user_account;
 		this.user_pwd = user_pwd;
-		this.user_score = 0;
 	}
 
 	public String getUser_account() {

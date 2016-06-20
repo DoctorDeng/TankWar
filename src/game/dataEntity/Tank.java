@@ -3,7 +3,7 @@ package game.dataEntity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import game.gameRun.GameListener;
+import game.control.GameListener;
 import view.GamePanel;
 
 /**

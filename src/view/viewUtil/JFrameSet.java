@@ -1,10 +1,12 @@
 package view.viewUtil;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,12 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import com.sun.awt.AWTUtilities;
+
 /**
  * 实现一个JFrame无边框，且能够自由拖动的类
  * @author Doctor邓
  *
  */
-public class JframeNoBorder {
+public class JFrameSet {
 	//用于处理拖动事件，表示鼠标按下时的坐标，相对于JFrame
 	private int xOld = 0;
 	private int yOld = 0;
@@ -80,5 +84,33 @@ public class JframeNoBorder {
 //		 jframe.setBounds(50,50,200,200);
 		 jframe.setUndecorated(true);
 
+	}
+	
+	/**
+	 * 设置JFrame为圆角
+	 * @param frame
+	 */
+	public void setFrameFillet(JFrame frame) {
+		AWTUtilities.setWindowShape(frame, new RoundRectangle2D.Double(  
+	            0.0D, 0.0D, frame.getWidth(), frame.getHeight(), 15.0D,  
+	            15.0D));  
+	}
+	
+	/**
+	 * 将frame 居中显示
+	 * @param frame
+	 */
+	public void setFrameCenter(JFrame frame) {
+		int screen_width = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int screen_height = Toolkit.getDefaultToolkit().getScreenSize().height;
+		frame.setLocation((screen_width - frame.getWidth())/2, (screen_height - frame.getHeight())/2);
+	}
+	
+	/**
+	 * 设置fram没有任务栏图标
+	 * @param frame
+	 */
+	public void setFrameNoIco(JFrame frame) {
+		frame.setType(java.awt.Window.Type.UTILITY);
 	}
 }

@@ -1,8 +1,8 @@
 package game.gameAssist;
 
+import game.control.DataAdmin;
+import game.control.TankClient;
 import game.dataEntity.Prop;
-import game.gameRun.DataAdmin;
-import game.gameRun.TankClient;
 /**
  * 游戏辅助工具类
  * @author Administrator

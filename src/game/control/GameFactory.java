@@ -1,4 +1,4 @@
-package game.gameRun;
+package game.control;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import view.GamePanel;
 /**
  * 
  * @author Doctor邓
- * 用于生成游戏的各个对象，例如：坦克，子弹，墙等。
+ * <p>作用: 用于生成游戏的各个对象，例如：坦克，子弹，墙等。<p>
  */
 public class GameFactory {
 
@@ -75,6 +75,9 @@ public class GameFactory {
 		return aiTanks;
 	}
 	
+	/**
+	 * @return 一个位置随机的AITank
+	 */
 	public AITank getAITank() {
 		int j = random.nextInt(aiPosition.length);
 		situationSymbol = j;

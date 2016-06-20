@@ -1,5 +1,5 @@
 package game.gameAssist;
-import game.gameRun.DataAdmin;
+import game.control.DataAdmin;
 
 /**
  * 让游戏停止的线程

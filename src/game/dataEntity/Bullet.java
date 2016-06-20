@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-import game.gameRun.GameListener;
+import game.control.GameListener;
 
 /**
  * 

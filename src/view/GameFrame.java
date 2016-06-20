@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 
 import com.sun.awt.AWTUtilities;
 
-import game.gameRun.GameListener;
-import game.gameRun.GamePaint;
-import view.viewUtil.JframeNoBorder;
+import game.control.GameListener;
+import game.control.GamePaint;
+import view.viewUtil.JFrameSet;
 /**
  * 
  * @author Doctor邓
@@ -59,7 +59,7 @@ public class GameFrame extends JFrame {
 		this.setType(java.awt.Window.Type.UTILITY); 
 		setTray.setTrayToFrame(this);
 		
-		new JframeNoBorder().noBorder(this);
+		new JFrameSet().noBorder(this);
 		/**
 		 * 设置窗体为圆角矩形
 		 */

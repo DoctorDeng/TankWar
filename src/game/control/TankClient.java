@@ -1,4 +1,4 @@
-package game.gameRun;
+package game.control;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,13 +6,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import entity.User;
 import game.dataEntity.GameMap;
 import game.gameAssist.GameAssistAI;
 import game.gameAssist.GameAssistInfor;
@@ -20,10 +22,6 @@ import game.gameAssist.GameAssistProp;
 import game.gameAssist.GameAssistWall;
 import view.GameFrame;
 import view.viewUtil.CommanButton;
-import view.viewUtil.SetTray;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * 
@@ -68,8 +66,8 @@ public class TankClient {
 	 */
 	public static int victory = 0;
 	
-	public TankClient() {
-		gameInit();
+	public TankClient(User user) {
+		gameInit(user);
 		assistInit();
 		viewInit();
 	}
@@ -77,8 +75,13 @@ public class TankClient {
 	/**
 	 * 游戏基本类初始化
 	 */
-	private void gameInit() {
+	private void gameInit(User user) {
 		admin = new DataAdmin();
+		/**
+		 * 将用户的信息放入数据中心中
+		 */
+		admin.getUser().setUser_account(user.getUser_account());
+		admin.getUser().setUser_pwd(user.getUser_pwd());
 		gameFactory = new GameFactory();
 		listener = new GameListener(admin);
 		gamePaint = new GamePaint(admin);
@@ -288,7 +291,7 @@ public class TankClient {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				gameFrame.getSetTray().removeTray();
 				System.exit(0);
 			}
 		});
