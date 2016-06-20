@@ -33,7 +33,7 @@ public class GamePaint {
 	private ImpactDetection impact;     //碰撞检测
 	private DataAdmin admin;            //游戏数据管理员
 	private GameMenu gameMenu;          //游戏菜单
-	private GameEndCartoon gameEnd;            //游戏结束类
+	private GameEndCartoon gameEnd;     //游戏结束类
 	private GameJudge gameJudge;        //判定游戏胜负
 	
 	public GamePaint(DataAdmin admin) {

@@ -66,13 +66,20 @@ public class UserAction {
 		 * 当用户第二次或n次上传分数时,执行更新分数的操作
 		 */
 		else {
-			String updateScore ="UPDATE socre SET user_score = ? WHERE user_account = ?";
-			List<String> infor = new ArrayList<>();
-			
-			infor.add(String.valueOf(user.getUser_score()));
-			infor.add(user.getUser_account());
-			
-			return commanDao.update(updateScore, infor);
+			/**
+			 * 当用户的分数比以前的分数高时才更新分数
+			 */
+			if(user.getUser_score() > getUserScore(user.getUser_account())) {
+				String updateScore ="UPDATE score SET user_score = ? WHERE user_account = ?";
+				List<String> infor = new ArrayList<>();
+				
+				infor.add(String.valueOf(user.getUser_score()));
+				infor.add(user.getUser_account());
+				
+				return commanDao.update(updateScore, infor);
+			} else {
+				return true;
+			}
 		}
 	}
 	
@@ -83,6 +90,7 @@ public class UserAction {
 	 *                    true  为上传过分数
 	 */
 	public boolean isScore(String user_account) {
+		
 		String isScore = "SELECT user_score FROM score WHERE user_account = ?";
 		List<String> account = new ArrayList<>();
 		
@@ -93,6 +101,20 @@ public class UserAction {
 			return false;
 		} else {
 			return true;
+		}
+	}
+	
+	public int getUserScore(String user_account) {
+		String getScore = "SELECT user_score FROM score WHERE user_account = ?";
+		List<String> account = new ArrayList<>();
+		
+		account.add(user_account);
+		
+		Vector<String[]> vector = commanDao.select(getScore, account);
+		if (vector.size() != 1) {
+			return 0;
+		} else {
+			return Integer.parseInt(vector.get(0)[0]);
 		}
 	}
 }

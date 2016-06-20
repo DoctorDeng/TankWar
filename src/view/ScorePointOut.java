@@ -7,26 +7,38 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import view.viewUtil.ImageAdapt;
 import view.viewUtil.JFrameSet;
-/**
- * 用于显示游戏分数上传过程动画和结果信息的frame
- * @author Doctor邓
- *
- */
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Color;
+
 public class ScorePointOut extends JFrame {
-	JFrameSet noBorder = new JFrameSet();
+	private JFrameSet noBorder = new JFrameSet();
 	
 	public ScorePointOut() {
 		getContentPane().setLayout(null);
-		setSize(400, 300);
+		setSize(400, 250);
 		noBorder.setFrameCenter(this);
-		this.setType(java.awt.Window.Type.UTILITY); 
+//		this.setType(java.awt.Window.Type.UTILITY); 
 		JLabel loadLabel = new JLabel("");
-		Image  load =  Toolkit.getDefaultToolkit().getImage("image/load/load4.gif");
-		loadLabel.setBounds(0, 0,400, 300);
+		Image  load =  Toolkit.getDefaultToolkit().getImage("image/load/load3.gif");
+		loadLabel.setBounds(0, 0,400, 200);
 		loadLabel.setIcon(new ImageIcon(load));
 		getContentPane().add(loadLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(102, 206, 255));
+		panel.setBounds(0, 193, 400, 63);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblUpdateYouSocre = new JLabel("updating you socre, please wait");
+		lblUpdateYouSocre.setForeground(new Color(240, 248, 255));
+		lblUpdateYouSocre.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		lblUpdateYouSocre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUpdateYouSocre.setBounds(0, 0, 400, 63);
+		panel.add(lblUpdateYouSocre);
 		noBorder.noBorder(this);
 		noBorder.setFrameFillet(this);
 		
@@ -36,14 +48,4 @@ public class ScorePointOut extends JFrame {
 		ScorePointOut  score = new ScorePointOut();
 		score.setVisible(true);
 	}
-	
-//	public void show() {
-//		this.setVisible(true);
-//	}
-//	
-//	public void hide() {
-//		this.setVisible(false);
-//	}
-	
-	
 }

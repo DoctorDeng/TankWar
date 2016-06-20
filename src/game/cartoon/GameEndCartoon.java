@@ -65,4 +65,6 @@ public class GameEndCartoon {
 		i=1;
 		j=0;
 	}
+	
+	
 }

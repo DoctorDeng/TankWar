@@ -19,6 +19,7 @@ import game.dataEntity.GameMap;
 import game.gameAssist.GameAssistAI;
 import game.gameAssist.GameAssistInfor;
 import game.gameAssist.GameAssistProp;
+import game.gameAssist.GameAssistScore;
 import game.gameAssist.GameAssistWall;
 import view.GameFrame;
 import view.viewUtil.CommanButton;
@@ -39,14 +40,15 @@ public class TankClient {
 	private GameAssistAI aiAssist;
 	private GameAssistWall wallAssist;
 	private GameAssistInfor inforAssist;
+	private GameAssistScore scoreAssist;
 	private JLabel score = new JLabel("? ? ?");;
 	private JLabel enemyNum = new JLabel("? ? ?");;
 	
 	private final Image CLOSE = Toolkit.getDefaultToolkit().getImage("image/loginView/close.png");
 	private final Image CLOSE_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/closeRed.png");
-	private final Image LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/logo.jpg");
-	private final Image TOUXIANG = Toolkit.getDefaultToolkit().getImage("image/loginView/touxiang.png");
-	private final Image TANK_LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/tankLogo.png");
+//	private final Image LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/logo.jpg");
+//	private final Image TOUXIANG = Toolkit.getDefaultToolkit().getImage("image/loginView/touxiang.png");
+//	private final Image TANK_LOGO = Toolkit.getDefaultToolkit().getImage("image/loginView/tankLogo.png");
 	private final Image MINIMUM = Toolkit.getDefaultToolkit().getImage("image/loginView/minimum.png");
 	private final Image MINIMUM_HOVER = Toolkit.getDefaultToolkit().getImage("image/loginView/minimumHover.png");
 	
@@ -132,6 +134,10 @@ public class TankClient {
 		 * 初始化游戏的各种数据 
 		 */
 		admin.setEnemyNum(20);
+		/**
+		 * 在每次游戏开始时都将游戏的分数存入用户对象中
+		 */
+		admin.getUser().setUser_score(admin.getScore());;
 		admin.setScore(0);
 		admin.getGameHome().setLive(true);
 		admin.setMyTanks(gameFactory.getMyTanks(playerNum));
@@ -154,8 +160,8 @@ public class TankClient {
 		inforPanel.setBounds(800, 29, 294, 191);
 		gameFrame.getContentPane().add(inforPanel);
 		inforPanel.setLayout(null);
-		Image image1 = Toolkit.getDefaultToolkit().getImage("image/startGame.png");
-		Image image2 = image1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+//		Image image1 = Toolkit.getDefaultToolkit().getImage("image/startGame.png");
+//		Image image2 = image1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		
 		JPanel scorePanel = new JPanel();
 		scorePanel.setBackground(new Color(204,51, 204));
@@ -163,7 +169,7 @@ public class TankClient {
 		inforPanel.add(scorePanel);
 		scorePanel.setLayout(null);
 		
-		JLabel scoreLabel = new JLabel("Score ");
+		JLabel scoreLabel = new JLabel("Score   -->");
 		scoreLabel.setBounds(0, 0, 152, 50);
 		scorePanel.add(scoreLabel);
 		scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -175,7 +181,7 @@ public class TankClient {
 		score.setForeground(new Color(255, 255, 255));
 		score.setFont(new Font("MV Boli", Font.PLAIN, 30));
 		score.setHorizontalAlignment(SwingConstants.CENTER);
-		Image image3 = Toolkit.getDefaultToolkit().getImage("image/grade.png");
+//		Image image3 = Toolkit.getDefaultToolkit().getImage("image/grade.png");
 		
 		JPanel aiNumPanel = new JPanel();
 		aiNumPanel.setBackground(new Color(204, 51, 204));
@@ -183,7 +189,7 @@ public class TankClient {
 		inforPanel.add(aiNumPanel);
 		aiNumPanel.setLayout(null);
 		
-		JLabel aiNumLabel = new JLabel("Ai Num");
+		JLabel aiNumLabel = new JLabel("Ai Num  -->");
 		aiNumLabel.setBounds(0, 0, 147, 50);
 		aiNumPanel.add(aiNumLabel);
 		aiNumLabel.setForeground(new Color(255, 255, 255));
@@ -247,12 +253,7 @@ public class TankClient {
 		setPanel.add(restartGame);
 		
 		CommanButton rankGame = new CommanButton("排行榜");
-		rankGame.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-		});
+		rankGame.setText("上传分数");
 		rankGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		rankGame.setHU_1(0);
 		rankGame.setHU_2(0);
@@ -383,11 +384,25 @@ public class TankClient {
 				}
 			}
 		});
+		
+		rankGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				/**
+				 * 当游戏结束时才能够上传分数
+				 */
+				if (!gameStatus) {
+					scoreAssist = new GameAssistScore(admin, gameFrame);
+					scoreAssist.start();
+				}
+			}
+		});
 	}
 	
-//	public static void main(String[] args) {
-//		TankClient gameRun = new TankClient();
-//	}
+	public static void main(String[] args) {
+		User user = new User("Test", "123456");
+		TankClient gameRun = new TankClient(user);
+	}
 	
 	/**
 	 * 获得玩家选择游戏的人数

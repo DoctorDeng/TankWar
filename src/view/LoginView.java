@@ -288,7 +288,7 @@ public class LoginView {
 	
 	public void login() {
 		
-		ScorePointOut pointOut = new ScorePointOut();
+		LoginPointOut pointOut = new LoginPointOut();
 		if (isClick == false) {
 			isClick = true;
 			pointOut.setVisible(true);
