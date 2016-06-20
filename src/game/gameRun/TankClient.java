@@ -18,9 +18,10 @@ import game.gameAssist.GameAssistAI;
 import game.gameAssist.GameAssistInfor;
 import game.gameAssist.GameAssistProp;
 import game.gameAssist.GameAssistWall;
-import game.model.GameFactory;
 import view.GameFrame;
 import view.viewUtil.CommanButton;
+import view.viewUtil.SetTray;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -243,6 +244,12 @@ public class TankClient {
 		setPanel.add(restartGame);
 		
 		CommanButton rankGame = new CommanButton("排行榜");
+		rankGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		rankGame.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		rankGame.setHU_1(0);
 		rankGame.setHU_2(0);
@@ -281,6 +288,7 @@ public class TankClient {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				System.exit(0);
 			}
 		});

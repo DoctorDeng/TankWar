@@ -2,9 +2,9 @@ package game.gameAssist;
 
 import game.dataEntity.AITank;
 import game.gameRun.DataAdmin;
+import game.gameRun.GameFactory;
 import game.gameRun.GameListener;
 import game.gameRun.TankClient;
-import game.model.GameFactory;
 
 /**
  * 用于检测敌方坦克的数量，并当敌方坦克数量少于6时，动态生成敌方坦克。

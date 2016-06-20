@@ -12,7 +12,7 @@ import view.GamePanel;
  * @author Doctor邓
  *
  */
-public class WallEffects {
+public class WallCartoon {
 	private final int  X = GamePanel.WIDTH/2 - GameHome.WIDTH;
 	private final int Y = GamePanel.HEIGHT -20 - 3*GameHome.HEIGHT/2;
 	private final int WIDTH = 2*GameHome.WIDTH;
@@ -25,7 +25,7 @@ public class WallEffects {
 			Toolkit.getDefaultToolkit().createImage("image/specialEffects/wall.png"),
 			Toolkit.getDefaultToolkit().createImage("image/specialEffects/whiteWall.png")
 			};
-	public WallEffects() {
+	public WallCartoon() {
 		isWall = false;
 		isWhiteWall = false;
 	}

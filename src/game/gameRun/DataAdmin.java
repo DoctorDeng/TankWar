@@ -3,8 +3,8 @@ package game.gameRun;
 import java.util.List;
 
 import game.cartoon.AICartoon;
-import game.cartoon.GameEnd;
-import game.cartoon.WallEffects;
+import game.cartoon.GameEndCartoon;
+import game.cartoon.WallCartoon;
 import game.dataEntity.AITank;
 import game.dataEntity.Boom;
 import game.dataEntity.Bullet;
@@ -35,7 +35,7 @@ public class DataAdmin {
 		gameData.getBooms().clear();
 	}
 	
-	public WallEffects getWallEffects() {
+	public WallCartoon getWallEffects() {
 		return gameData.getWallEffects();
 	}
 	
@@ -160,7 +160,7 @@ public class DataAdmin {
 		gameData.setEnemyNum(enemyNum);
 	}
 	
-	public GameEnd getGameEnd() {
+	public GameEndCartoon getGameEnd() {
 		return gameData.getGameEnd();
 	}
 }

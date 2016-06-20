@@ -72,4 +72,8 @@ public class GameFrame extends JFrame {
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}
+
+	public SetTray getSetTray() {
+		return setTray;
+	}
 }

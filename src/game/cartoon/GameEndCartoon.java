@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import game.gameRun.TankClient;
 import view.GamePanel;
 
-public class GameEnd {
+public class GameEndCartoon {
 	private  int x =0;
 	private  int y =0;
 	private int width;

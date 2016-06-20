@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.util.List;
 
 import game.cartoon.AICartoon;
-import game.cartoon.GameEnd;
-import game.cartoon.WallEffects;
+import game.cartoon.GameEndCartoon;
+import game.cartoon.WallCartoon;
 import game.dataEntity.AITank;
 import game.dataEntity.Boom;
 import game.dataEntity.Bullet;
@@ -14,7 +14,8 @@ import game.dataEntity.GameMenu;
 import game.dataEntity.MyTank;
 import game.dataEntity.Prop;
 import game.dataEntity.Wall;
-import game.model.GameJudge; 
+import game.model.GameJudge;
+import game.model.ImpactDetection; 
 /**
  * 画出游戏的各种对象，如坦克，子弹，爆炸、墙等
  */
@@ -27,12 +28,12 @@ public class GamePaint {
 	private List<Wall> walls;           //墙集合
 	private List<Boom> booms;           //爆炸集合
 	private GameHome home;              //家
-	private WallEffects wallEffects;    //老家白墙切换到红墙特效
+	private WallCartoon wallEffects;    //老家白墙切换到红墙特效
 	private AICartoon aiCartoon;        //aiTank生成时动画
 	private ImpactDetection impact;     //碰撞检测
 	private DataAdmin admin;            //游戏数据管理员
 	private GameMenu gameMenu;          //游戏菜单
-	private GameEnd gameEnd;            //游戏结束类
+	private GameEndCartoon gameEnd;            //游戏结束类
 	private GameJudge gameJudge;        //判定游戏胜负
 	
 	public GamePaint(DataAdmin admin) {

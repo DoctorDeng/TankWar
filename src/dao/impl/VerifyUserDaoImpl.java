@@ -26,8 +26,8 @@ public class VerifyUserDaoImpl implements VerifyUserDao{
 	
 	@Override
 	public boolean verify(String account, String pwd) {
-		String sql = "SELECT user_id FROM user_info WHERE user_account = ? and "
-				+ "user_pwd = ?";
+		String sql = "SELECT * FROM users WHERE user_account = ? and "
+				+ "user_password = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);

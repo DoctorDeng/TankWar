@@ -9,7 +9,7 @@ import java.util.Random;
 
 import game.gameAssist.GameAssistStop;
 import game.gameRun.DataAdmin;
-import game.model.GameFactory;
+import game.gameRun.GameFactory;
 
 /**
  * 

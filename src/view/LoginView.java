@@ -22,14 +22,12 @@ import javax.swing.SwingConstants;
 
 import com.sun.awt.AWTUtilities;
 
-import bussiness.LoginAction;
-import bussiness.VerifyUserAction;
+import bussiness.UserAction;
 import game.gameRun.TankClient;
 import util.OpenURL;
 import view.viewUtil.CommanButton;
 import view.viewUtil.CommanJPasswordField;
 import view.viewUtil.JframeNoBorder;
-import view.viewUtil.LoginCartoon;
 import view.viewUtil.RoundJTextField;
 import view.viewUtil.SetTray;
 
@@ -49,7 +47,7 @@ public class LoginView {
 	private JButton cancelLogin;
 	private JLabel headLabel;
 	
-	private VerifyUserAction verifyUser = new VerifyUserAction();
+	private UserAction verifyUser = new UserAction();
 	private OpenURL openURL = new OpenURL();
 	private SetTray setTray = new SetTray();
 	
@@ -257,7 +255,7 @@ public class LoginView {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				openURL.gotoUrl("http://doctordeng.github.io/signUp.html");
+				openURL.gotoUrl("http://119.29.223.16/JSPStudy/tankWar/signUp.jsp");
 			}
 		});
 		
@@ -272,7 +270,7 @@ public class LoginView {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				openURL.gotoUrl("http://doctordeng.github.io/changePwd.html");
+				openURL.gotoUrl("http://119.29.223.16/JSPStudy/tankWar/login.jsp");
 			}
 		});
 		
@@ -297,7 +295,7 @@ public class LoginView {
 				error_login.setText("用户名或密码为空,请重新输入");
 				isClick = false;
 			}
-			else if (verifyUser.verify(user_account.getText().trim(), user_pwd.getText())) {
+			else if (verifyUser.verifyUser(user_account.getText().trim(), user_pwd.getText())) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {

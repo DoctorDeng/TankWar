@@ -3,9 +3,10 @@ package game.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import entity.User;
 import game.cartoon.AICartoon;
-import game.cartoon.GameEnd;
-import game.cartoon.WallEffects;
+import game.cartoon.GameEndCartoon;
+import game.cartoon.WallCartoon;
 import game.dataEntity.AITank;
 import game.dataEntity.Boom;
 import game.dataEntity.Bullet;
@@ -29,12 +30,13 @@ public class GameData {
 	private List<Wall> walls;           //墙集合
 	private List<Boom> booms;           //爆炸集合
 	private GameHome gameHome;          //家
-	private WallEffects wallEffects;    //老家动画特效
+	private WallCartoon wallEffects;    //老家动画特效
 	private AICartoon aiCartoon;        //AI坦克生成时动画
 	private GameMenu gameMenu;          //游戏菜单
 	private int score;                  //游戏分数
 	private int enemyNum;               //游戏剩余敌人数量
-	private GameEnd gameEnd;            //游戏结束类
+	private GameEndCartoon gameEnd;     //游戏结束类
+	private User user;                  //游戏用户
 	
 	public GameData() {
 		myTanks = new ArrayList<MyTank>();
@@ -44,15 +46,14 @@ public class GameData {
 		walls = new ArrayList<Wall>();
 		booms = new ArrayList<Boom>();
 		gameHome = new GameHome();
-		wallEffects = new WallEffects();
+		wallEffects = new WallCartoon();
 		aiCartoon = new AICartoon();
 		gameMenu = new GameMenu();
-		gameEnd = new GameEnd();
+		gameEnd = new GameEndCartoon();
 		score = 0;
-		enemyNum = 3;
 	} 
 	
-	public WallEffects getWallEffects() {
+	public WallCartoon getWallEffects() {
 		return wallEffects;
 	}
 	
@@ -140,7 +141,7 @@ public class GameData {
 		this.enemyNum = enemyNum;
 	}
 
-	public GameEnd getGameEnd() {
+	public GameEndCartoon getGameEnd() {
 		return gameEnd;
 	}
 }

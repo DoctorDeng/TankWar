@@ -1,2 +1,7 @@
 /game/
+/util/
+/view/
 /dao/
+/entity/
+/bussiness/
+/unless/
