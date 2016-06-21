@@ -44,9 +44,9 @@ public class SetTray {
 	         trayIcon.setToolTip("Tank War");
 	         
 	         PopupMenu popupMenu = new PopupMenu();
-	         MenuItem showFrame = new MenuItem("打开主面板");
+	         MenuItem showFrame = new MenuItem("show view");
 	         popupMenu.add(showFrame);
-	         MenuItem exit = new MenuItem("退出");
+	         MenuItem exit = new MenuItem("exit");
 	         popupMenu.add(exit);
 	         popupMenu.addSeparator();
 	         

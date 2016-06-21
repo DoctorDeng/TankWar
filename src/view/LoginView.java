@@ -33,6 +33,8 @@ import view.viewUtil.CommanJPasswordField;
 import view.viewUtil.JFrameSet;
 import view.viewUtil.RoundJTextField;
 import view.viewUtil.SetTray;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 /**
  * 游戏登陆的界面
  * @author Doctor邓
@@ -172,6 +174,16 @@ public class LoginView {
 		loginPanel.add(user_pwd);
 		
 		loginButton = new CommanButton("登     陆");
+		user_pwd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch(e.getKeyCode()) {
+				case KeyEvent.VK_ENTER:
+					login();
+					break;
+				}
+			}
+		});
 //		loginButton.setMargin(new Insets(0,0,0,0));
 		loginButton.setBorder(null);
 		loginButton.setForeground(new Color(240, 248, 255));
@@ -290,6 +302,26 @@ public class LoginView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				openURL.gotoUrl("http://119.29.223.16/JSPStudy/tankWar/login.jsp");
+			}
+		});
+		user_pwd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch(e.getKeyCode()) {
+				case KeyEvent.VK_ENTER:
+					login();
+					break;
+				}
+			}
+		});
+		user_account.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch(e.getKeyCode()) {
+				case KeyEvent.VK_ENTER:
+					login();
+					break;
+				}
 			}
 		});
 		/**
