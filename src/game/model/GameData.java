@@ -22,21 +22,62 @@ import game.dataEntity.Wall;
  *	<p>游戏的数据中心,存储游戏的数据<p>
  */
 public class GameData {
-	
-	private List<MyTank> myTanks;       //我方坦克集合
-	private List<AITank> aiTanks;       //AI坦克集合
-	private List<Bullet> bullets;       //子弹集合
-	private List<Prop> props;           //道具集合
-	private List<Wall> walls;           //墙集合
-	private List<Boom> booms;           //爆炸集合
-	private GameHome gameHome;          //家
-	private WallCartoon wallEffects;    //老家动画特效
-	private AICartoon aiCartoon;        //AI坦克生成时动画
-	private GameMenu gameMenu;          //游戏菜单
-	private int score;                  //游戏分数
-	private int enemyNum;               //游戏剩余敌人数量
-	private GameEndCartoon gameEnd;     //游戏结束类
-	private User user;                  //游戏用户
+	/**
+	 * 我方坦克集合
+	 */
+	private List<MyTank> myTanks;      
+	/**
+	 * AI坦克集合
+	 */
+	private List<AITank> aiTanks;       
+	/**
+	 * 子弹集合
+	 */
+	private List<Bullet> bullets;      
+	/**
+	 * 道具集合
+	 */
+	private List<Prop> props;           
+	/**
+	 * 墙集合
+	 */
+	private List<Wall> walls;           
+	/**
+	 * 爆炸集合
+	 */
+	private List<Boom> booms;           
+	/**
+	 * 家
+	 */
+	private GameHome gameHome;         
+	/**
+	 * 老家动画特效
+	 */
+	private WallCartoon wallEffects;    
+	/**
+	 * AI坦克生成时动画
+	 */
+	private AICartoon aiCartoon;        
+	/**
+	 * 游戏菜单
+	 */
+	private GameMenu gameMenu;          
+	/**
+	 * 游戏分数
+	 */
+	private int score;                  
+	/**
+	 * 游戏剩余敌人数量
+	 */
+	private int enemyNum;               
+	/**
+	 * 游戏结束类
+	 */
+	private GameEndCartoon gameEnd;     
+	/**
+	 * 游戏用户
+	 */
+	private User user;                  
 	
 	public GameData() {
 		myTanks = new ArrayList<MyTank>();

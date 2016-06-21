@@ -11,9 +11,8 @@ import game.dataEntity.Prop;
 import game.dataEntity.Wall;
 
 /**
- * 
- * @author Doctor邓
  * 游戏的碰撞检测类,检测坦克和墙，坦克和子弹，子弹和墙等对象的碰撞
+ * @author Doctor邓
  */
 public class ImpactDetection {
 	private DataAdmin admin;

@@ -14,7 +14,9 @@ public class GameJudge {
 	public GameJudge(DataAdmin admin) {
 		this.admin = admin;
 	} 
-	
+	/**
+	 * 判断游戏是否胜利或失败
+	 */
 	public void judge() {
 		/**
 		 * 当敌方坦克全部 被摧毁时，游戏胜利

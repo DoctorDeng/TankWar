@@ -29,13 +29,17 @@ public class GameFrame extends JFrame {
 	private final int Y;
 	private final int ScreenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	private final int ScreenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	/**
+	 * 窗口的托盘对象
+	 */
 	private SetTray setTray;
 	
-	//游戏画面
+	/**
+	 * 游戏画面
+	 */
 	private GamePanel gamePanel;
 	private GameListener listener;
 	public GameFrame(GamePaint gamePaint, GameListener listener) {
-		
 		X = (ScreenWidth - GameWidth)/2;
 		Y = (ScreenHeight - GameHeight)/2;
 		gamePanel = new GamePanel(gamePaint);

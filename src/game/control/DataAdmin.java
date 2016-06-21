@@ -87,7 +87,10 @@ public class DataAdmin {
 		gameData.setEnemyNum(gameData.getEnemyNum() - 1);
 		gameData.getAiTanks().add(aiTank);
 	}
-	
+	/**
+	 * 给所有的游戏坦克对象添加游戏的监听器
+	 * @param listener   说要添加的监听器对象
+	 */
 	public void dataAddListener(GameListener listener) {
 		for (int i=0; i<getMyTanks().size(); i++) {
 			getMyTanks().get(i).setGameListener(listener);

@@ -32,7 +32,9 @@ public class GameAssistStop extends Thread{
 			break;
 		}
 	}
-	
+	/**
+	 * 停止所有AI坦克移动
+	 */
 	public void stopAITank() {
 		for (int i=0; i< admin.getAITanks().size(); i++) {
 			admin.getAITanks().get(i).setStopStatus(false);

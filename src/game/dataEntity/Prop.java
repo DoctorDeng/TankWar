@@ -12,9 +12,8 @@ import game.control.GameFactory;
 import game.gameAssist.GameAssistStop;
 
 /**
- * 
+ * 游戏道具的实体类
  * @author Doctor邓
- * 道具类
  */
 public class Prop {
 	
@@ -33,7 +32,9 @@ public class Prop {
 	private int symbol;
 	private Random random = new Random();
 	private DataAdmin admin;
-	
+	/**
+	 * 道具图片的集合
+	 */
 	private Image[] images = {
 			Toolkit.getDefaultToolkit().getImage("image/prop/lifeProp.png"),
 			Toolkit.getDefaultToolkit().getImage("image/prop/wallProp.png"),
@@ -49,11 +50,17 @@ public class Prop {
 		this.symbol = random.nextInt(images.length);
 //		this.symbol = 4;
 	}
-	
+	/**
+	 * 道具画图方法
+	 * @param g   所需要的画笔
+	 */
 	public void draw(Graphics g) {
 		g.drawImage(images[symbol], x, y, null);
 	}
-	
+	/**
+	 * 道具的功能方法
+	 * @param myTank  捡到道具的我方坦克
+	 */
 	public void function(MyTank myTank) {
 		switch(symbol) {
 		case 0:
@@ -73,17 +80,26 @@ public class Prop {
 			break;
 		}
 	}
-
+	/**
+	 * 加血功能,恢复坦克的生命值
+	 * @param myTank  捡到道具的我方坦克
+	 */
 	public void lifeFunction(MyTank myTank) {
 		myTank.setLife(myTank.getMAX_LIFE());
 	}
-	
+	/**
+	 * 将老家的墙变为白墙的功能
+	 * @param myTank  捡到道具的我方坦克
+	 */
 	public void wallFunction() {
 		int[][] whiteHomeMap = new GameMap().getWhiteHomeMap();
 		List<Wall> wallList = new GameFactory().getWalls(whiteHomeMap);
 		admin.getWalls().addAll(wallList);
 	}
-	
+	/**
+	 * 杀死所有出现的地方坦克的功能
+	 * @param myTank  捡到道具的我方坦克
+	 */
 	public void boomFunction() {
 		/**
 		 * 所有ai坦克发生爆炸
@@ -96,18 +112,24 @@ public class Prop {
 		  */
 		 admin.getAITanks().clear();
 	}
-	
+	/**
+	 * 让所有地方坦克无法移动的功能
+	 * @param myTank  捡到道具的我方坦克
+	 */
 	public void stopFunction() {
 		GameAssistStop stopGame = new GameAssistStop(admin, 1);
 		stopGame.start();
 	}
-	
+	/**
+	 * 强化坦克功能：
+	 * <p>当坦克的移动速度为初始移动速度4时，提升移动速度
+	 * <p>再次获得start道具后，判断坦克的弹夹容量，如果为原弹夹数量1，则提升弹夹数量
+	 * <p>再次获得start道具后，判断坦克的子弹威力dps，如果为初始威力1，则提升子弹威力
+	 * @param myTank
+	 * 
+	 */
 	public void starFunction(MyTank myTank) {
-		/**
-		 * 当坦克的移动速度为初始移动速度4时，提升移动速度
-		 * 再次获得start道具后，判断坦克的弹夹容量，如果为原弹夹数量1，则提升弹夹数量
-		 * 再次获得start道具后，判断坦克的子弹威力dps，如果为初始威力1，则提升子弹威力
-		 */
+		
 		if (myTank.getSpeed() == 4) {
 			myTank.setSpeed(5);
 		} else if (myTank.getBulletMax() <= 1) {
@@ -117,7 +139,10 @@ public class Prop {
 			myTank.setBulletMax(1);
 		}
 	}
-	
+	/**
+	 * 获得道具所占的游戏空间
+	 * @return
+	 */
 	public Rectangle getRect() {
 		return new Rectangle(x, y, WIDTH + 10, HEIGHT + 10);
 	}

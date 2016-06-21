@@ -4,7 +4,7 @@ import game.control.DataAdmin;
 import game.control.TankClient;
 import game.dataEntity.Prop;
 /**
- * 游戏辅助工具类
+ * 动态生成游戏道具的线程
  * @author Administrator
  *
  */

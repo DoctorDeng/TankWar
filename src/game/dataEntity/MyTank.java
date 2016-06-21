@@ -44,7 +44,10 @@ public class MyTank extends Tank {
 		hpBar.draw(g);
 		move();
 	}
-	
+	/**
+	 * 通过坦克方向,选择坦克的图片
+	 * @return   根据坦克方向确定的图片
+	 */
 	public Image selectImage() {
 		switch(getDir()) {
 			case Up: 
@@ -60,7 +63,11 @@ public class MyTank extends Tank {
 		}
 	}
 
-	//坦克的血条类
+	/**
+	 * 坦克的血条内部类
+	 * @author Doctor邓
+	 *
+	 */
 	private class HPbar {
 		public void draw(Graphics g) {
 			Color c = g.getColor();

@@ -1,16 +1,17 @@
-package game.control;
+package game.gameAssist;
 
 import javax.swing.JPanel;
 
+import game.control.TankClient;
+
 /**
- * 
+ * 后台每隔一段时间就重画的线程
  * @author Doctor邓
- * 生成游戏画面类
  */
-public class GameRepaint implements Runnable{
+public class GameAssistRepaint implements Runnable{
 	private JPanel gamePanel;
 
-	public GameRepaint(JPanel gamePanel) {
+	public GameAssistRepaint(JPanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 	
@@ -25,7 +26,6 @@ public class GameRepaint implements Runnable{
 				gamePanel.repaint();
 				Thread.sleep(45);
 			} catch (InterruptedException e) {
-				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
 		}

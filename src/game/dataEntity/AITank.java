@@ -6,15 +6,28 @@ import java.awt.Toolkit;
 import java.util.Random;
 
 import view.GamePanel;
-
+/**
+ * AI坦克实体类
+ * @author Doctor邓
+ *
+ */
 public class AITank extends Tank {
 	
-	//随机数产生器
+	/**
+	 * 随机数产生器
+	 */
 	public static Random random = new Random();
-	//用于存储每次改变方向最少移动敌方坦克移动步数
+	/**
+	 * 用于存储每次改变方向最少移动敌方坦克移动步数
+	 */
 	private int step = random.nextInt(12) + 3;
-	//AI坦克每次移动步数的范围限制
+	/**
+	 * AI坦克每次最小移动步数
+	 */
 	private final int MINSTEP = 3;
+	/**
+	 * AI坦克每次最大移动步数
+	 */
 	private final int MAXSTEP = 20;
 	/**
 	 * 坦克的生命值
@@ -22,6 +35,9 @@ public class AITank extends Tank {
 	private int life;
 	/**
 	 * 用来表示为何种AI坦克的标识
+	 * <p> 0  :  普通坦克,生命值为2,移动速度一般,分值 ：10
+	 * <p> 1  :  重型坦克,生命值为3,移动速度慢,子弹伤害高  分值 ：20
+	 * <p> 2  :  快速坦克,生命值为1,移动速度快,一次可以发两发子弹  分值 ：15
 	 */
 	private int symbol;
 	/**
@@ -32,7 +48,9 @@ public class AITank extends Tank {
 	 * 每个AI坦克的分值 
 	 */
 	private int tankScore;
-	
+	/**
+	 * 所有AI坦克图片的集合
+	 */
 	private final Image[][] images = {
 			{Toolkit.getDefaultToolkit().createImage("image/aiTank/aiTank1Up.gif"),
 				Toolkit.getDefaultToolkit().createImage("image/aiTank/aiTank1Down.gif"),
@@ -54,6 +72,12 @@ public class AITank extends Tank {
 	public AITank() {
 		
 	}
+	/**
+	 * 通过指定的X,Y坐标初始画一个AI坦克
+	 * @param x  指定的X坐标
+	 * @param y  指定的Y坐标
+	 * <p>默认：AI坦克可以移动,且方向向下,且可以正常开火
+	 */
 	public AITank(int x, int y) {
 		super();
 		setX(x);
@@ -91,7 +115,9 @@ public class AITank extends Tank {
 		}
 	}
 	
-	
+	/**
+	 * AI 坦克的画图方法
+	 */
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage(selectImage(), getX(), getY(),  null);
@@ -107,7 +133,10 @@ public class AITank extends Tank {
 			}
 		}
 	}
-	
+	/**
+	 * 通过坦克方向,选择坦克的图片
+	 * @return   根据坦克方向确定的图片
+	 */
 	public Image selectImage(){
 		switch(getDir()) {
 		case Up: 

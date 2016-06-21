@@ -17,7 +17,8 @@ import game.dataEntity.Wall;
 import game.model.GameJudge;
 import game.model.ImpactDetection; 
 /**
- * 画出游戏的各种对象，如坦克，子弹，爆炸、墙等
+ * 游戏的画图类
+ * <p>画出游戏的各种对象，如坦克，子弹，爆炸、墙等
  */
 public class GamePaint {
 	
@@ -43,6 +44,10 @@ public class GamePaint {
 		dataInit();
 	}
 	
+	/**
+	 * 画图类的总画图方法
+	 * @param g   画图类所需要的画笔
+	 */
 	public void draw(Graphics g) {
 		/**
 		 * 当游戏没有开始时，进行游戏菜单画图方法
@@ -124,6 +129,10 @@ public class GamePaint {
 		gameEnd.draw(g);
 	}
 	
+	/**
+	 * 画所有坦克
+	 * @param g	所需要的画笔
+	 */
 	private void drawTank(Graphics g) {
 		for(int i=0; i<myTanks.size(); i++) {
 			myTanks.get(i).draw(g);
@@ -133,40 +142,61 @@ public class GamePaint {
 			aiTanks.get(i).draw(g);
 		}
 	}
-	
+	/**
+	 * 画所有子弹
+	 * @param g	所需要的画笔
+	 */
 	private void drawBullet(Graphics g) {
 		for(int i=0; i<bullets.size(); i++) {
 			bullets.get(i).draw(g);
 		}
 	}
-	
+	/**
+	 * 画所有爆炸
+	 * @param g	所需要的画笔
+	 */
 	private void drawBoom(Graphics g) {
 		for(int i=0; i<booms.size(); i++) {
 			booms.get(i).draw(g);
 		}
 	}
-	
+	/**
+	 * 画所有墙
+	 * @param g	所需要的画笔
+	 */
 	private void drawWall(Graphics g) {
 		for (int i=0; i<walls.size(); i++) {
 			walls.get(i).draw(g);
 		}
 	}
 	
-	
+	/**
+	 * 画所有道具
+	 * @param g	所需要的画笔
+	 */
 	private void drawProp(Graphics g) {
 		for(int i=0; i<props.size(); i++) {
 			props.get(i).draw(g);
 		}
 	}
-	
+	/**
+	 * 画老家
+	 * @param g	所需要的画笔
+	 */
 	private void drawHome(Graphics g) {
 		home.draw(g);
 	}
-	
+	/**
+	 * 画老家动画
+	 * @param g	所需要的画笔
+	 */
 	private void drawWallEffecits(Graphics g) {
 		wallEffects.draw(g);
 	}
-	
+	/**
+	 * 画AI坦克出现时动画
+	 * @param g	所需要的画笔
+	 */
 	private void drawAICartoon(Graphics g) {
 		aiCartoon.draw(g);
 	}

@@ -17,17 +17,41 @@ public class Bullet {
 	private int y;
 	private final int WIDTH = 12;
 	private final int HEIGHT = 12;
+	/**
+	 * 子弹存活标识
+	 */
 	private boolean live;
+	/**
+	 * 子弹阵营
+	 */
 	private boolean camp;
+	/**
+	 * 子弹速度
+	 */
 	private int speed = 8;
+	/**
+	 * 子弹方向
+	 */
 	private Direction dir;
 	/**
 	 * 记录子弹是哪个坦克发出的
 	 */
 	private Tank ourTank;
+	/**
+	 * 子弹的监听器
+	 */
 	private GameListener listener;
+	/**
+	 * 普通子弹图片
+	 */
 	private Image bullet = Toolkit.getDefaultToolkit().getImage("image/bullet/bullet.png");
+	/**
+	 * 超级子弹图片
+	 */
 	private Image superBullet = Toolkit.getDefaultToolkit().getImage("image/bullet/superBullet.png");
+	/**
+	 * 中等子弹图片
+	 */
 	private Image mediumBullet = Toolkit.getDefaultToolkit().getImage("image/bullet/mediumBullet.png");
 	/**
 	 * 子弹的威力值
@@ -44,7 +68,9 @@ public class Bullet {
 		this.dps = dps;
 		speedInit(ourTank);
 	}
-	
+	/**
+	 * 子弹移动方法
+	 */
 	public void move() {
 		if (live) {
 			switch(dir) {
@@ -64,13 +90,19 @@ public class Bullet {
 		}
 		
 	}
-	
+	/**
+	 * 根据坦克阵营来初始化子弹的速度
+	 * @param tank   子弹所属坦克
+	 */
 	public void speedInit(Tank tank) {
 		if (tank.isCamp()) {
 			speed = 14;
 		} 
 	}
-	
+	/**
+	 * 子弹画图方法
+	 * @param g   所需要的画笔
+	 */
 	public void draw(Graphics g) {
 		if (!live) return;
 		if (dps == 1) {

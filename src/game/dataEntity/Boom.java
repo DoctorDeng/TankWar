@@ -13,13 +13,23 @@ import game.control.GameListener;
 public class Boom {
 	private int x;
 	private int y;
+	/**
+	 * 爆炸存活标识,默认存活
+	 * <p>true: 存活
+	 * <p>false: 死亡
+	 */
 	private boolean live = true;
 	private GameListener listener;
-	
-	private int step =0; //记录子弹画到第几步了
+	/**
+	 * 记录子弹画到第几步了
+	 */
+	private int step =0; 
 	
 	private static boolean init = false;
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	/**
+	 * 爆炸图片集合
+	 */
 	private static Image[] imgs = {
 			tk.getImage("image/Boom/0.gif"),
 			tk.getImage("image/Boom/1.gif"),
@@ -38,7 +48,10 @@ public class Boom {
 		this.x = x;
 		this.y = y;
 	}
-	
+	/**
+	 * 爆炸的画图方法
+	 * @param g   需要的画笔
+	 */
 	public void draw(Graphics g) {
 
 		if(!init) {
@@ -47,12 +60,16 @@ public class Boom {
 			}			
 			init = true;
 		}
-		
+		/**
+		 * 但爆炸死亡时,通知监听器
+		 */
 		if (!live) {
 			listener.boomEnd(this);
 			return;
 		}
-		
+		/**
+		 * 但爆炸画图的步数达到上限时,爆炸死亡
+		 */
 		if (step == imgs.length) {
 			live = false;
 			step = 0;

@@ -7,7 +7,7 @@ import game.control.TankClient;
 import game.dataEntity.AITank;
 
 /**
- * 用于检测敌方坦克的数量，并当敌方坦克数量少于6时，动态生成敌方坦克。
+ * 用于检测敌方坦克的数量，并当敌方坦克数量少于6时，动态生成敌方坦克的线程。
  * @author Doctor邓
  *
  */

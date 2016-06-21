@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import game.control.GamePaint;
-import game.control.GameRepaint;
+import game.gameAssist.GameAssistRepaint;
 
 public class GamePanel extends JPanel{
 	/**
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel{
 		setSize(WIDTH, HEIGHT);
 		setLocation(X, Y);
 		setBackground(Color.BLACK);
-		new Thread(new GameRepaint(this)).start();
+		new Thread(new GameAssistRepaint(this)).start();
 	}
 	
 	public void paintComponent(Graphics g) {

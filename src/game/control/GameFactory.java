@@ -14,7 +14,7 @@ import view.GamePanel;
 /**
  * 
  * @author Doctor邓
- * <p>作用: 用于生成游戏的各个对象，例如：坦克，子弹，墙等。<p>
+ * <p>作用: 用于生成游戏的各个对象的工厂类，例如：坦克，子弹，墙等。<p>
  */
 public class GameFactory {
 
@@ -37,9 +37,9 @@ public class GameFactory {
 			{GamePanel.WIDTH/2 + Tank.WIDTH*2, GamePanel.HEIGHT - Tank.HEIGHT}};
 	
 	/**
-	 * 初始化一个或两个我方坦克。
+	 * 初始化我方坦克。
 	 * @param volume  要初始化我方坦克的数量
-	 * @return        返回我方坦克的集合
+	 * @return        返回我方坦克的List集合
 	 */
 	public List<MyTank> getMyTanks(int volume) {
 		List<MyTank> myTanks = new ArrayList<>();
@@ -61,6 +61,11 @@ public class GameFactory {
 		return myTanks;
 	}
 	
+	/**
+	 * 初始化AI坦克
+	 * @param volume    要初始化的AI坦克的数量
+	 * @return          返回AI坦克的List集合
+	 */
 	public List<AITank> getAITanks(int volume) {
 		List<AITank> aiTanks = new ArrayList<AITank>();
 		
@@ -127,7 +132,11 @@ public class GameFactory {
 		}
 		return wallList;
 	}
-
+	
+	/**
+	 * 获得代表AI坦克初始位置的标识符
+	 * @return   返回AI坦克的初始位置标识符
+	 */
 	public int getSituationSymbol() {
 		return situationSymbol;
 	}

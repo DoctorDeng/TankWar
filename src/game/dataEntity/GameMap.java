@@ -1,7 +1,11 @@
 package game.dataEntity;
 
 import view.GamePanel;
-
+/**
+ * 游戏地图的实体类
+ * @author Doctor邓
+ *
+ */
 public class GameMap {
 
 	/**

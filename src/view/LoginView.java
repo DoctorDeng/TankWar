@@ -33,7 +33,11 @@ import view.viewUtil.CommanJPasswordField;
 import view.viewUtil.JFrameSet;
 import view.viewUtil.RoundJTextField;
 import view.viewUtil.SetTray;
-
+/**
+ * 游戏登陆的界面
+ * @author Doctor邓
+ *
+ */
 public class LoginView {
 
 	private JFrame loginFrame;
@@ -212,7 +216,9 @@ public class LoginView {
 		error_login.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		error_login.setBounds(130, 76, 200, 23);
 		loginPanel.add(error_login);
-		
+		/**
+		 * 窗口关闭的鼠标事件
+		 */
 		closeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -227,7 +233,9 @@ public class LoginView {
 				System.exit(0);
 			}
 		});
-		
+		/**
+		 * 缩小窗口的鼠标事件
+		 */
 		minimumLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -242,11 +250,17 @@ public class LoginView {
 				loginFrame.setVisible(false);
 			}
 		});
+		/**
+		 * 登陆的监听事件
+		 */
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				login();
 			}
 		});
+		/**
+		 * 注册的监听事件
+		 */
 		signLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -261,7 +275,9 @@ public class LoginView {
 				openURL.gotoUrl("http://119.29.223.16/JSPStudy/tankWar/signUp.jsp");
 			}
 		});
-		
+		/**
+		 * 改密的监听事件
+		 */
 		changePwdLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -276,7 +292,9 @@ public class LoginView {
 				openURL.gotoUrl("http://119.29.223.16/JSPStudy/tankWar/login.jsp");
 			}
 		});
-		
+		/**
+		 * 设置窗口无边框
+		 */
 		new JFrameSet().noBorder(loginFrame);
 		/**
 		 * 设置窗体为圆角矩形
@@ -285,7 +303,9 @@ public class LoginView {
 	            0.0D, 0.0D, loginFrame.getWidth(), loginFrame.getHeight(), 15.0D,  
 	            15.0D));  
 	}
-	
+	/**
+	 * 登陆方法
+	 */
 	public void login() {
 		
 		LoginPointOut pointOut = new LoginPointOut();

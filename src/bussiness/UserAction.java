@@ -20,6 +20,13 @@ public class UserAction {
 		commanDao = new CommenCURDDaoImpl();
 	}
 	
+	/**
+	 * 根据用户名和密码来验证用户的登陆信息是否正确
+	 * @param user_account   :指定的用户名
+	 * @param user_pwd       :指定用户的密码
+	 * @return               <p>true: 登陆信息正确<p>
+	 *                       <p>false: 登陆信息不正确（用户名或密码错误）<p>
+	 */
 	public boolean verifyUser(String user_account, String user_pwd) {
 		String selectUser ="SELECT id FROM users WHERE user_account = ? AND user_password = ?";
 		List<String> userInfor = new ArrayList<>();
@@ -35,6 +42,11 @@ public class UserAction {
 		}
 	}
 	
+	/**
+	 * 通过用户名确认是否存在此用户
+	 * @param user_account
+	 * @return
+	 */
 	public boolean isUser(String user_account) {
 		String selectUser = "SELECT id FROM users WHERE user_account = ? ";
 		List<String> account = new ArrayList<>();
@@ -49,6 +61,12 @@ public class UserAction {
 		}
 	}
 	
+	/**
+	 * 根据指定User对象,为其添加或更新分数
+	 * @param user     ：指定的用户对象
+	 * @return         <p>true分数添加或更新成功
+	 *                 <p>false分数添加或更新失败
+	 */                            
 	public boolean addScore(User user) {
 		/**
 		 * 当用户第一次上传分数时,执行插入分数操作
@@ -104,6 +122,12 @@ public class UserAction {
 		}
 	}
 	
+	/**
+	 * 获得指定用户名的历史最高分
+	 * @param user_account     ：指定的用户名
+	 * @return                 <p>返回指定用户名的分数
+	 *                         <p>如果用户名不能存在或没有上传过分数,则返回： 0
+	 */
 	public int getUserScore(String user_account) {
 		String getScore = "SELECT user_score FROM score WHERE user_account = ?";
 		List<String> account = new ArrayList<>();

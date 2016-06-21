@@ -5,7 +5,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import view.GamePanel;
-
+/**
+ * 游戏开始选择时的菜单实体类
+ * @author Doctor邓
+ *
+ */
 public class GameMenu {
 	/**
 	 * 游戏菜单背景图坐标
@@ -43,7 +47,10 @@ public class GameMenu {
 	 * 游戏菜单选择人数时，小坦克的位置集合
 	 */
 	private final int[][] XY = {{230,400},{230,445}};
-	
+	/**
+	 * 菜单画图方法
+	 * @param g   所需要的画笔
+	 */
 	public void draw(Graphics g) {
 		if (menuStatus) {
 			showCartoon();
@@ -59,7 +66,7 @@ public class GameMenu {
 		
 	}
 	/**
-	 * 根据玩家的选择确定小坦克的位置
+	 * 根据玩家的选择确定选择的小坦克的位置
 	 */
 	public void selectPosition() {
 		if (playerNum) {
@@ -90,7 +97,9 @@ public class GameMenu {
 			j++;
 		}
 	}
-	
+	/**
+	 * Menu数据初始化
+	 */
 	public void dataInit() {
 		i=0;
 		j=0;

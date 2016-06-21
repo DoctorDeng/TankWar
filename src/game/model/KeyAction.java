@@ -9,22 +9,30 @@ import game.dataEntity.Direction;
 import game.dataEntity.MyTank;
 
 /**
- * 
- * @author Doctor邓
  *	游戏监听类，用于监听用户的操作，
+ * @author Doctor邓
  */
 public class KeyAction {
 	private DataAdmin admin;
 	private List<MyTank> myTanks;
-	private MyTank myTank1 = null;   //玩家一
-	private MyTank myTank2 = null;   //玩家二
+	/**
+	 * 玩家一
+	 */
+	private MyTank myTank1 = null;   
+	/**
+	 * 玩家二
+	 */
+	private MyTank myTank2 = null;   
 	
 	public KeyAction(DataAdmin admin) {
 		this.admin = admin;
 		this.myTanks = this.admin.getMyTanks();
 	} 
 	
-	
+	/**
+	 * 按键按下处理方法
+	 * @param e
+	 */
 	public  void keyPressed(KeyEvent e) {
 		/**
 		 * 通过游戏是否已经开始的状态来确定键盘监听事件

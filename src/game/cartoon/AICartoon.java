@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import view.GamePanel;
 
 /**
- * AI坦克
+ * AI坦克在生成时的动画类
  * @author Administrator
  *
  */
@@ -25,9 +25,12 @@ public class AICartoon {
 	 */
 	private boolean isOpen;
 	/**
-	 * 决定画哪一张图片的标识
+	 * 决定图片的标识,决定每次动画画哪一张图片
 	 */
 	private int numCartoon;
+	/**
+	 * 动画图片的集合
+	 */
 	private final Image[] images = {
 			Toolkit.getDefaultToolkit().createImage("image/aiCartoon/1.png"),
 			Toolkit.getDefaultToolkit().createImage("image/aiCartoon/2.png"),
@@ -36,13 +39,22 @@ public class AICartoon {
 	private final int[][] situation = {{40,0},{GamePanel.WIDTH/2 - WIDTH/2,0},
 			{GamePanel.WIDTH -10 - 30 - WIDTH,0}};
 	
-	
+	/**
+	 * 无参的构造方法,默认：
+	 * <p>isOpen = false   :不开启动画
+	 * <p>numCartoon = 1   :初始画第一张动画图片
+	 * <p>symbol = 0       :初始位置标识为0,即游戏左上角位置
+	 */
 	public AICartoon() {
 		isOpen = false;
 		numCartoon = 1;
 		symbol = 0;
 	}
 	
+	/**
+	 * 动画的画图方法
+	 * @param g    动画画图需要的画笔 Graphics
+	 */
 	public void draw(Graphics g) {
 		if(isOpen) {
 			selectSituation(symbol);
@@ -50,11 +62,21 @@ public class AICartoon {
 		}
 	}
 	
+	/**
+	 * 通过动画的位置标识符,确定动画出现的位置
+	 * @param symbol    动画的位置标识符
+	 */
 	private void selectSituation(int symbol) {
 			x = situation[symbol][0];
 			y = situation[symbol][1];
 	}
 	
+	
+	/**
+	 * 通过图片标识,决定动画所要画的图片
+	 * @param numCartoon     :动画图片标识
+	 * @return
+	 */
 	private Image selectImage(int numCartoon) {
 		switch(numCartoon) {
 		case 1:

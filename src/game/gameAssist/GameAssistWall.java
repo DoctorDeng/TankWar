@@ -8,7 +8,7 @@ import game.control.TankClient;
 import game.dataEntity.GameMap;
 import game.dataEntity.Wall;
 /**
- * 用于每隔一段时间就将老家的白墙转换为红墙
+ * 用于每隔一段时间就将老家存在白墙转换为红墙
  * @author Doctor邓
  *
  */

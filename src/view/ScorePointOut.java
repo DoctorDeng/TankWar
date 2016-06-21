@@ -12,7 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
-
+/**
+ * 上传分数时的动画窗口
+ * @author Doctor邓
+ *
+ */
 public class ScorePointOut extends JFrame {
 	private JFrameSet noBorder = new JFrameSet();
 	
@@ -20,7 +24,7 @@ public class ScorePointOut extends JFrame {
 		getContentPane().setLayout(null);
 		setSize(400, 250);
 		noBorder.setFrameCenter(this);
-//		this.setType(java.awt.Window.Type.UTILITY); 
+		this.setType(java.awt.Window.Type.UTILITY); 
 		JLabel loadLabel = new JLabel("");
 		Image  load =  Toolkit.getDefaultToolkit().getImage("image/load/load3.gif");
 		loadLabel.setBounds(0, 0,400, 200);

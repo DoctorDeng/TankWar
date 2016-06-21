@@ -6,9 +6,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 /**
- * 
+ * 游戏中的墙的实体类
  * @author Doctor邓
- * 墙类
  */
 public class Wall {
 	private int x;
@@ -35,9 +34,13 @@ public class Wall {
 		    Toolkit.getDefaultToolkit().getImage("image/wall/whiteWallRow.png"),      //横的白墙
 		    Toolkit.getDefaultToolkit().getImage("image/wall/whiteWallCrow.png")       //竖的白墙
 	};
+	/**
+	 * 墙默认为红墙
+	 * <p>墙的护甲默认为0,即可以被任何子弹打穿
+	 */
 	public Wall() {
-		wallMark=0;      //墙默认为红墙
-		setArmor(0);    //墙的护甲默认为0
+		wallMark=0;      
+		setArmor(0);    
 		width = 50;
 		height = 50;
 	}
@@ -49,6 +52,10 @@ public class Wall {
 		armorInit(wallMark);
 		whInit(wallMark);
 	}
+	/**
+	 * 坦克画图方法
+	 * @param g  
+	 */ 
 	public void draw(Graphics g) {
 		g.drawImage(images[wallMark], x, y, width, height,	null);
 	}
