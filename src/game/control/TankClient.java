@@ -21,6 +21,7 @@ import game.gameAssist.GameAssistInfor;
 import game.gameAssist.GameAssistProp;
 import game.gameAssist.GameAssistScore;
 import game.gameAssist.GameAssistWall;
+import game.model.GameFactory;
 import view.GameFrame;
 import view.viewUtil.CommanButton;
 

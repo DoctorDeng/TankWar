@@ -1,7 +1,4 @@
-package game.model;
-
-import game.control.DataAdmin;
-import game.control.TankClient;
+package game.control;
 
 /**
  * 判断游戏胜利或者失败的类

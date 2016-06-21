@@ -3,10 +3,10 @@ package game.gameAssist;
 import java.util.List;
 
 import game.control.DataAdmin;
-import game.control.GameFactory;
 import game.control.TankClient;
 import game.dataEntity.GameMap;
 import game.dataEntity.Wall;
+import game.model.GameFactory;
 /**
  * 用于每隔一段时间就将老家存在白墙转换为红墙
  * @author Doctor邓

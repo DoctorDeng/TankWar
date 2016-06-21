@@ -14,7 +14,6 @@ import game.dataEntity.GameMenu;
 import game.dataEntity.MyTank;
 import game.dataEntity.Prop;
 import game.dataEntity.Wall;
-import game.model.GameJudge;
 import game.model.ImpactDetection; 
 /**
  * 游戏的画图类
