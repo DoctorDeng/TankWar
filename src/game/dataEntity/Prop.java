@@ -106,6 +106,7 @@ public class Prop {
 		 */
 		 for(int i=0; i<admin.getAITanks().size(); i++) {
 			 admin.getAITanks().get(i).boom();
+			 admin.setScore(admin.getScore() +  admin.getAITanks().get(i).getTankScore());
 		 }
 		 /**
 		  * 清空所有ai坦克
