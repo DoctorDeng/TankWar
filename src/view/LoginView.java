@@ -211,7 +211,7 @@ public class LoginView {
 		signLabel.setBounds(340, 23, 54, 15);
 		loginPanel.add(signLabel);
 		
-		changePwdLabel = new JLabel("找回密码");
+		changePwdLabel = new JLabel("修改密码");
 		changePwdLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		changePwdLabel.setForeground(new Color(39, 134, 228));
 		changePwdLabel.setFont(new Font("微软雅黑", Font.PLAIN, 13));
