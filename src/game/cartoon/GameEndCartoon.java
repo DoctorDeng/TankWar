@@ -45,8 +45,8 @@ public class GameEndCartoon {
 		width = 338;
 		height = 265;
 		x=GamePanel.WIDTH/2 - width/2;
-		y=GamePanel.HEIGHT - j*10;
-		int temp = 52;
+		y=GamePanel.HEIGHT - j*5;
+		int temp = 104;
 		if (j< temp) {
 			j++;
 		} else {
