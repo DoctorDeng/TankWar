@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dao.VerifyUserDao;
-import util.SqlUtil;
-import util.impl.DBCPUtil;
+import util.ConnectionManager;
+import util.impl.DBCPConnectionManager;
 /**
  * 验证用户名和密码
  * @author Doctor邓
@@ -17,11 +17,11 @@ public class VerifyUserDaoImpl implements VerifyUserDao{
 
 	private Connection conn;
 	private PreparedStatement ps;
-	private SqlUtil sqlUtil;
+	private ConnectionManager connectionManager;
 	
 	public VerifyUserDaoImpl() {
-		sqlUtil = new DBCPUtil();
-		conn = sqlUtil.getConn();
+		connectionManager = new DBCPConnectionManager();
+		conn = connectionManager.getConnection();
 	}
 	
 	@Override

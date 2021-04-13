@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Vector;
 
 import dao.CommanCURDDao;
-import util.SqlUtil;
-import util.impl.DBCPUtil;
+import util.ConnectionManager;
+import util.impl.DBCPConnectionManager;
+
 /**
  * 通用的数据库CURD操作的实现类
  * @author Doctor邓
@@ -20,11 +21,11 @@ public class CommenCURDDaoImpl implements CommanCURDDao{
 	
 	private Connection conn;
 	private PreparedStatement ps;
-	private SqlUtil sqlUtil;
+	private ConnectionManager connectionManager;
 	
 	public CommenCURDDaoImpl() {
-		sqlUtil = new DBCPUtil();
-		conn = sqlUtil.getConn();
+		connectionManager = new DBCPConnectionManager();
+		conn = connectionManager.getConnection();
 	}
 	
 	@Override

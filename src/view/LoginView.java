@@ -25,8 +25,10 @@ import javax.swing.SwingConstants;
 import com.sun.awt.AWTUtilities;
 
 import bussiness.UserAction;
+import config.TankWarProperties;
 import entity.User;
 import game.control.TankClient;
+import unless.VerifyUserAction;
 import util.OpenURL;
 import view.viewUtil.CommanButton;
 import view.viewUtil.CommanJPasswordField;
@@ -56,8 +58,7 @@ public class LoginView {
 	private JLabel signLabel;
 	private JButton cancelLogin;
 	private JLabel headLabel;
-	
-	private UserAction verifyUser = new UserAction();
+
 	private OpenURL openURL = new OpenURL();
 	private SetTray setTray = new SetTray();
 	
@@ -78,6 +79,10 @@ public class LoginView {
 	 * true  : 被点击过 
 	 */
 	private boolean isClick = false;
+	/**
+	 * 配置类.
+	 */
+	private TankWarProperties tankWarProperties = new TankWarProperties();
 	/**
 	 * Launch the application.
 	 */
@@ -339,7 +344,6 @@ public class LoginView {
 	 * 登陆方法
 	 */
 	public void login() {
-		
 		LoginPointOut pointOut = new LoginPointOut();
 		if (isClick == false) {
 			isClick = true;
@@ -350,46 +354,52 @@ public class LoginView {
 			 */
 			Timer timer = new Timer();  
 	        timer.schedule(new TimerTask() {  
-	            public void run() {  
+	            public void run() {
+					if (!tankWarProperties.getLoginAuthEnabled()) {
+						loginSuccess(User.createTempUser(), pointOut);
+						return;
+					}
 	            	if ("".equals(user_account.getText().trim()) || "".equals(user_pwd.getText().trim())
 	    					|| null == user_account.getText().trim() || null ==user_pwd.getText().trim()) {
-	    				
 	    				error_login.setText("用户名或密码为空,请重新输入");
 	    				isClick = false;
 	    				pointOut.setVisible(false);
 	    				loginFrame.setVisible(true);
 	    			}
-	    			else if (verifyUser.verifyUser(user_account.getText().trim(), user_pwd.getText())) {
-	    				EventQueue.invokeLater(new Runnable() {
-	    					public void run() {
-	    						try {
-	    							User user = new User(user_account.getText().trim(),user_pwd.getText());
-	    							TankClient tankClient = new TankClient(user);
-	    						} catch (Exception e) {
-	    							e.printStackTrace();
-	    						}
-	    					}
-	    				});
-	    				/**
-	    				 * 登陆成功后，释放登陆窗口,并退出托盘图标
-	    				 */
-	    				exit();
-	    				isClick = false;
-	    				pointOut.dispose();
-	    			} 
 	    			else {
-	    				error_login.setText("用户名或密码错误,请重新输入！");
-	    				isClick = false;
-	    				pointOut.setVisible(false);;
-	    				loginFrame.setVisible(true);
-	    			} 
+	    				UserAction verifyUser = new UserAction();
+						if (verifyUser.verifyUser(user_account.getText().trim(), user_pwd.getText())) {
+							User user = new User(user_account.getText().trim(),user_pwd.getText());
+							loginSuccess(user, pointOut);
+						} else {
+							error_login.setText("用户名或密码错误,请重新输入！");
+							isClick = false;
+							pointOut.setVisible(false);;
+							loginFrame.setVisible(true);
+						}
+	    			}
+
 	            }  
 	        }, 3000);
-			
-			
 		}
 	}
-	
+
+	private void loginSuccess(User user, LoginPointOut pointOut) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TankClient tankClient = new TankClient(User.createTempUser());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		// 登陆成功后，释放登陆窗口,并退出托盘图标
+		exit();
+		isClick = false;
+		pointOut.dispose();
+	}
+
 	/**
 	 * 释放当前窗口和相关的托盘
 	 */

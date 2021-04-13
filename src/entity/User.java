@@ -58,4 +58,16 @@ public class User {
 	public void setUser_score(int user_score) {
 		this.user_score = user_score;
 	}
+
+	/**
+	 * 创建临时用户.
+	 * @return 临时用户
+	 */
+	public static User createTempUser() {
+		User user = new User();
+		user.setUser_account("temp");
+		user.setUser_pwd("temp");
+		user.setUser_score(0);
+		return user;
+	}
 }
